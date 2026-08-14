@@ -65,6 +65,30 @@ Solid orange on a dark-on-dark element is a violation — it reads as a loud sla
    offset** (e.g. Reviews has `pb-6` for its 12px card shadows), otherwise the next
    section's opaque background paints over the shadow.
 
+## Typography scale — display numerals
+
+Section headlines (H1/H2) are the ONLY text allowed above 60px (`text-6xl`).
+Everything else caps out below them:
+
+| Element | Scale | Example |
+|---|---|---|
+| Section headlines | up to `text-7xl` / `lg:text-[72px]` | "YOUR PHOENIX AUTHORITY." |
+| Hero-stat strip numerals | `text-4xl sm:text-5xl md:text-6xl` | TrustBar 1.2K+ / 5 / 100% / 24/7 |
+| Stat-tile numerals (in grids) | `text-4xl md:text-5xl` | Reviews stats grid |
+| Overlay badge numerals | `text-4xl sm:text-6xl` | Authority "100%" badge |
+
+A badge numeral at `text-8xl` (96px) shipped once and dominated its whole
+section — that's why this cap exists. Do not exceed `text-6xl` outside headlines.
+
+## Third-party services
+
+- The RecreateAI booking widget/form belonged to another contractor and was
+  removed (script, preconnects, and all CTA hrefs — CTAs currently have
+  `href=""` on purpose until SDG has its own booking form). Do not re-add
+  any `recreateai.com` reference.
+- GTM/GA IDs (`GTM-TGD7D98V`, `AW-17639730806`, `G-CXLYZDNFYZ`) are inherited
+  from the previous site and must be swapped to SDG-owned accounts before launch.
+
 ## Phone / identity
 
 - Placeholder tracking number: 480-415-0660 (SDG's real line is 480-536-9456 — not yet swapped in).
