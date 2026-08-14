@@ -1,0 +1,214 @@
+---
+import Base from '../layouts/Base.astro';
+
+const PHONE_NUMBER = "480-415-0660";
+
+const steps = [
+  {
+    step: "01",
+    title: "We'll Be in Touch",
+    desc: "Our team will reach out to confirm your appointment window and answer any questions before we arrive.",
+    iconPath: `<path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.26 13a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.18 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L7.91 9.91a16 16 0 0 0 6.18 6.18l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>`,
+  },
+  {
+    step: "02",
+    title: "On-Time Arrival",
+    desc: "We show up when we say we will — no vague 4-hour windows. Your time matters.",
+    iconPath: `<circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/>`,
+  },
+  {
+    step: "03",
+    title: "Done Right, Guaranteed",
+    desc: "Every job is backed by our 100% satisfaction guarantee. We don't leave until it's perfect.",
+    iconPath: `<path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 11 14 15 10"/>`,
+  },
+];
+
+const reassurance = [
+  { val: "100%", label: "Satisfaction Guaranteed" },
+  { val: "5★",   label: "Google Rating" },
+  { val: "24/7", label: "We're Available" },
+  { val: "1,200+", label: "Phoenix Families Served" },
+];
+---
+
+<Base
+  title="Booking Confirmed | SDG Electric"
+  description="Your appointment with SDG Electric is confirmed. We look forward to serving you in Phoenix, AZ."
+>
+  <div class="min-h-screen bg-white font-sans text-black overflow-x-hidden w-full relative">
+
+    <!-- Alert Banner -->
+    <div class="bg-accent text-white text-center py-2 px-4 text-sm font-black uppercase italic tracking-widest">
+      24/7 Emergency Electrical Needs in Phoenix!
+    </div>
+
+    <!-- Nav -->
+    <nav class="bg-white border-b-2 border-black px-6 md:px-12 py-4 flex items-center justify-between">
+      <img src="/assets/logo.png" alt="SDG Electric Logo" class="h-10 md:h-14 w-auto object-contain" />
+      <a
+        href={`tel:${PHONE_NUMBER}`}
+        class="flex items-center gap-2 bg-black text-white px-6 py-3 font-black text-sm uppercase italic tracking-widest border-2 border-black shadow-[6px_6px_0px_0px_#D58C46] hover:shadow-none hover:translate-x-1 hover:translate-y-1 transition-all"
+      >
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="white" stroke="none"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.26 13a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.18 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L7.91 9.91a16 16 0 0 0 6.18 6.18l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+        {PHONE_NUMBER}
+      </a>
+    </nav>
+
+    <!-- Hero — Thank You -->
+    <section class="bg-black text-white pt-24 pb-32 md:pt-32 md:pb-40 relative overflow-hidden">
+      <div class="absolute inset-0 opacity-[0.03] pointer-events-none bg-[url('https://www.transparenttextures.com/patterns/carbon-fibre.png')]"></div>
+      <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[400px] bg-accent/10 blur-[120px] pointer-events-none"></div>
+
+      <div class="max-w-5xl mx-auto px-6 md:px-12 relative z-10 text-center">
+        <div class="inline-flex items-center gap-3 bg-accent text-white px-6 py-3 font-black text-xs uppercase italic tracking-[0.4em] mb-10">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+          Booking Confirmed
+        </div>
+
+        <h1 class="text-[72px] sm:text-[96px] md:text-[120px] lg:text-[140px] font-black uppercase italic tracking-tighter leading-[0.85] mb-8">
+          THANK<br /><span class="text-accent">YOU.</span>
+        </h1>
+
+        <p class="text-white/70 text-xl md:text-2xl font-medium leading-relaxed max-w-2xl mx-auto mb-12">
+          Your appointment is booked. We look forward to serving you and making sure your home's power is safe, reliable, and running right.
+        </p>
+
+        <div class="flex flex-col sm:flex-row gap-6 justify-center">
+          <a
+            href={`tel:${PHONE_NUMBER}`}
+            class="flex items-center justify-center gap-3 bg-white text-black px-10 py-5 border-2 border-white shadow-[6px_6px_0px_0px_#D58C46] font-black text-sm uppercase italic tracking-widest hover:shadow-none hover:translate-x-1.5 hover:translate-y-1.5 transition-all"
+          >
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="black" stroke="none"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.26 13a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.18 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L7.91 9.91a16 16 0 0 0 6.18 6.18l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+            Call Us Anytime
+          </a>
+          <a
+            href="/licensed-electrician-phoenix"
+            class="flex items-center justify-center gap-3 bg-transparent text-white px-10 py-5 border-2 border-white/20 font-black text-sm uppercase italic tracking-widest hover:border-accent hover:text-accent transition-all"
+          >
+            Back to Home
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- What to Expect -->
+    <section class="bg-white pt-24 pb-24 md:pt-32 md:pb-32 text-black">
+      <div class="max-w-7xl mx-auto px-6 md:px-12">
+        <div class="text-center mb-16 md:mb-24">
+          <p class="text-accent font-black text-xs sm:text-sm uppercase tracking-[0.4em] mb-4 italic">Here's What's Next</p>
+          <h2 class="text-5xl md:text-7xl lg:text-[72px] font-black uppercase italic tracking-tighter leading-[0.9]">WHAT TO<br />EXPECT.</h2>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
+          {steps.map((item) => (
+            <div class="group relative bg-white p-8 md:p-12 border-2 border-black shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] hover:shadow-none hover:translate-x-2 hover:translate-y-2 transition-all">
+              <p class="text-accent font-black text-5xl italic tracking-tighter leading-none mb-6 opacity-20">{item.step}</p>
+              <div class="text-accent mb-6 group-hover:scale-110 transition-transform">
+                <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" set:html={item.iconPath} />
+              </div>
+              <h3 class="font-black uppercase italic text-xl tracking-tight mb-3">{item.title}</h3>
+              <p class="text-black/60 font-medium leading-relaxed">{item.desc}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- Reassurance Strip -->
+    <section class="bg-black text-white py-16 md:py-20">
+      <div class="max-w-7xl mx-auto px-6 md:px-12">
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
+          {reassurance.map((stat) => (
+            <div class="group cursor-default">
+              <p class="text-white text-4xl sm:text-5xl md:text-6xl font-black italic group-hover:text-accent transition-colors">{stat.val}</p>
+              <p class="text-white/40 font-black uppercase text-[10px] tracking-[0.2em] mt-2 italic">{stat.label}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- Review Spotlight -->
+    <section class="bg-white py-24 md:py-32">
+      <div class="max-w-4xl mx-auto px-6 md:px-12 text-center">
+        <p class="text-accent font-black text-xs sm:text-sm uppercase tracking-[0.4em] mb-6 italic">You're in Good Hands</p>
+        <h2 class="text-4xl md:text-6xl font-black uppercase italic tracking-tighter leading-[0.9] mb-16">
+          JOIN 1,200+<br />HAPPY NEIGHBORS.
+        </h2>
+        <div class="bg-black text-white p-10 md:p-16 border-2 border-black shadow-[12px_12px_0px_0px_#D58C46] text-left relative group hover:-translate-x-1 hover:-translate-y-1 transition-transform">
+          <div class="flex items-center gap-4 mb-8">
+            <div class="w-14 h-14 flex items-center justify-center font-black text-2xl border-2 border-white text-accent bg-black">M</div>
+            <div>
+              <p class="font-black text-xl uppercase italic tracking-tight">Mike O.</p>
+              <p class="text-[10px] font-black uppercase tracking-widest text-white/40 mb-1">ANTHEM, AZ</p>
+              <div class="flex gap-0.5 text-accent">
+                {Array.from({length: 5}).map(() => (
+                  <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="currentColor" stroke="none"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                ))}
+              </div>
+            </div>
+            <div class="ml-auto flex items-center gap-2 opacity-50">
+              <img src="https://upload.wikimedia.org/wikipedia/commons/2/2f/Google_2015_logo.svg" alt="Google" class="h-5 object-contain brightness-0 invert" />
+            </div>
+          </div>
+          <p class="text-white/70 italic text-xl font-medium leading-relaxed">
+            "We've hired SDG Electric three times—outlet upgrades, a full breaker box replacement with outbuilding power, and new fans with recessed lighting. Every time, communication is great, the work is done right, and they don't leave until it's perfect. Highly recommend!"
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Questions CTA -->
+    <section class="bg-black text-white py-24 md:py-32">
+      <div class="max-w-5xl mx-auto px-6 md:px-12 text-center">
+        <p class="text-accent font-black text-xs sm:text-sm uppercase tracking-[0.4em] mb-6 italic">Questions Before Your Appointment?</p>
+        <h2 class="text-5xl md:text-7xl lg:text-[80px] font-black uppercase italic tracking-tighter leading-[0.9] mb-12">
+          WE'RE ONE<br />CALL AWAY.
+        </h2>
+        <p class="text-white/60 text-xl font-medium leading-relaxed mb-12 max-w-xl mx-auto">
+          Our team is standing by 24/7. Don't hesitate to reach out with any questions about your upcoming visit.
+        </p>
+        <a
+          href={`tel:${PHONE_NUMBER}`}
+          class="inline-flex items-center gap-4 bg-accent text-white px-12 py-6 border-2 border-accent shadow-[8px_8px_0px_0px_rgba(255,255,255,0.15)] font-black text-xl uppercase italic tracking-widest hover:shadow-none hover:translate-x-2 hover:translate-y-2 transition-all"
+        >
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="white" stroke="none"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.26 13a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.18 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L7.91 9.91a16 16 0 0 0 6.18 6.18l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+          {PHONE_NUMBER}
+        </a>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-black text-white pt-20 pb-12 border-t-[6px] border-accent relative overflow-hidden">
+      <div class="absolute inset-0 opacity-[0.03] pointer-events-none bg-[url('https://www.transparenttextures.com/patterns/carbon-fibre.png')]"></div>
+      <div class="max-w-7xl mx-auto px-6 md:px-12 relative z-10">
+        <div class="flex flex-col md:flex-row justify-between items-start gap-12 pb-12 border-b-2 border-white/5 mb-12">
+          <div class="space-y-6">
+            <img src="/assets/logo.png" alt="SDG Electric Logo" class="h-10 md:h-14 w-auto object-contain" />
+            <p class="text-white/40 max-w-xs text-lg font-medium leading-relaxed">
+              SDG Electric: Phoenix's Premium Choice for Power &amp; Safety.
+            </p>
+          </div>
+          <div class="flex flex-col gap-4 font-black italic uppercase text-lg">
+            <div class="flex items-center gap-4">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#D58C46" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="shrink-0"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+              <span class="text-white/70">Phoenix, AZ</span>
+            </div>
+            <div class="flex items-center gap-4">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#D58C46" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="shrink-0"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.26 13a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.18 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L7.91 9.91a16 16 0 0 0 6.18 6.18l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+              <a href={`tel:${PHONE_NUMBER}`} class="text-white/70 hover:text-accent transition-colors">{PHONE_NUMBER}</a>
+            </div>
+          </div>
+        </div>
+        <div class="flex flex-col md:flex-row justify-between items-center gap-6 text-[10px] font-black uppercase tracking-[0.5em] italic text-white/10">
+          <div class="flex gap-10">
+            <a href="#" class="hover:text-accent transition-colors">Privacy</a>
+            <a href="#" class="hover:text-accent transition-colors">Terms</a>
+          </div>
+          <p>© 2026 SDG Electric</p>
+        </div>
+      </div>
+    </footer>
+
+  </div>
+</Base>

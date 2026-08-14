@@ -1,0 +1,67 @@
+---
+const features = [
+  { title: "LICENSED & BONDED",    desc: "Complete legal protection and peace of mind for every job." },
+  { title: "UPFRONT PRICING",      desc: "Know the exact cost before we pick up a tool. No surprises." },
+  { title: "SAME-DAY REPAIR",      desc: "Electrical issues don't wait, and neither do we. Rapid response." },
+  { title: "ON-TIME APPOINTMENTS", desc: "We arrive when we say we will." },
+  { title: "24/7 EMERGENCY",       desc: "Power failure at 3 AM? Our emergency team is always ready." },
+  { title: "CLEAN TECHNICIANS",    desc: "We treat your home like our own. No mess left behind, ever." },
+];
+---
+
+<section id="authority-standards" class="pt-24 pb-24 md:pt-32 md:pb-32 bg-black text-white" aria-label="About our team and service standards">
+
+  <!-- Authority Content -->
+  <div class="max-w-7xl mx-auto px-6 md:px-12 grid lg:grid-cols-2 gap-16 md:gap-24 items-start mb-12 md:mb-48">
+
+    <div class="order-2 lg:order-1">
+      <p class="text-accent font-black text-xs sm:text-sm uppercase tracking-[0.4em] mb-4 italic">Licensed &amp; Trusted</p>
+      <h2 class="text-5xl md:text-7xl lg:text-[72px] font-black italic uppercase leading-[0.9] tracking-tighter text-white mb-12">YOUR <br />PHOENIX <br />AUTHORITY.</h2>
+      <p class="leading-relaxed text-white/70 text-xl">
+        Stop gambling on an electrician who might show up. At <strong>SDG Electric</strong>, we are in our trucks and ready to work right now. We live where you live, and we treat your home's wiring like it was our own.
+      </p>
+    </div>
+
+    <div class="order-1 lg:order-2 lg:sticky lg:top-32 h-fit relative">
+      <div class="relative group overflow-hidden border-[4px] border-black shadow-[24px_24px_0px_0px_#D58C46] aspect-square z-10">
+        <img
+          src="/assets/team.webp"
+          alt="Expert Electrical Team in Phoenix"
+          loading="lazy"
+          decoding="async"
+          class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+        />
+        <div class="absolute top-6 right-6 bg-black text-white px-4 py-2 font-black italic uppercase text-[10px] tracking-widest border border-white/20">
+          SDG ELECTRIC TEAM
+        </div>
+      </div>
+      <div class="absolute -bottom-6 sm:-bottom-10 -left-6 sm:-left-10 bg-black p-8 sm:p-12 border-2 border-white shadow-[12px_12px_0px_0px_rgba(213,140,70,0.15)] max-w-[240px] sm:max-w-[300px] z-20">
+        <p class="font-black text-6xl sm:text-8xl italic uppercase leading-none mb-2 sm:mb-4 tracking-tighter text-accent">100%</p>
+        <p class="font-black text-[10px] sm:text-sm uppercase leading-tight tracking-[0.3em] italic text-white">Satisfaction <br />Guarantee</p>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Service Excellence -->
+  <div id="service-excellence" class="max-w-7xl mx-auto px-6 md:px-12">
+    <div class="text-left mb-12 md:mb-20">
+      <p class="text-accent font-black text-xs sm:text-sm uppercase tracking-[0.4em] mb-4 italic">The SDG Electric Standard</p>
+      <h2 class="text-5xl md:text-7xl lg:text-[72px] font-black italic uppercase leading-[0.9] tracking-tighter text-white">SERVICE <br class="md:hidden" />EXCELLENCE.</h2>
+    </div>
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-y-8 md:gap-y-12 gap-x-12">
+      {features.map((item) => (
+        <div class="group flex flex-row gap-4 items-start">
+          <div class="mt-1 bg-black border border-white/20 p-1 flex items-center justify-center shrink-0 group-hover:border-accent transition-colors">
+            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="#D58C46" stroke="none"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+          </div>
+          <div class="flex flex-col">
+            <h3 class="text-white font-black uppercase italic text-base tracking-widest mb-1 group-hover:text-accent transition-colors leading-tight">{item.title}</h3>
+            <p class="text-white/50 text-base font-medium leading-relaxed">{item.desc}</p>
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+
+</section>

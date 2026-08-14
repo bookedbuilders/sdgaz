@@ -1,0 +1,49 @@
+---
+// Reusable proof/authority image section for panel upgrade landing pages
+---
+<section class="bg-black text-white overflow-hidden" aria-label="Our panel upgrade work">
+  <div class="max-w-7xl mx-auto">
+    <div class="grid grid-cols-1 lg:grid-cols-2">
+
+      <!-- Image -->
+      <div class="relative min-h-[420px] lg:min-h-[580px] overflow-hidden order-1 lg:order-1">
+        <img
+          src="/assets/panel-electrician.jpg"
+          alt="SDG Electric electrician next to a completed panel installation"
+          loading="lazy"
+          decoding="async"
+          class="absolute inset-0 w-full h-full object-cover object-top"
+        />
+        <div class="absolute inset-0 bg-black/10"></div>
+      </div>
+
+      <!-- Copy -->
+      <div class="px-10 py-16 md:p-20 flex flex-col justify-center order-2 lg:order-2">
+        <p class="text-accent font-black text-xs sm:text-sm uppercase tracking-[0.4em] mb-4 italic">Proven In Phoenix</p>
+        <h2 class="text-4xl md:text-5xl lg:text-[56px] font-black italic tracking-tighter uppercase leading-[0.9] mb-8">
+          200+ Panel Upgrades. <span class="text-accent">Zero Callbacks.</span>
+        </h2>
+        <ul class="space-y-4 mb-10">
+          {[
+            "Licensed & bonded electricians",
+            "Certified replacement invoice issued day of install",
+            "0% financing — approval in under 60 seconds",
+          ].map((item) => (
+            <li class="flex items-start gap-3 text-white/80 font-medium leading-snug">
+              <span class="text-accent font-black shrink-0 mt-0.5">✓</span>{item}
+            </li>
+          ))}
+        </ul>
+        <a
+          href="https://form.recreateai.com/?rai_pak=57aa3ca2-4a06-4329-b414-f9695d418558"
+          aria-label="Get my free panel estimate"
+          class="schedule-btn-rai self-start inline-flex items-center gap-3 bg-white text-black px-10 py-5 border-2 border-white font-black text-sm uppercase italic tracking-widest shadow-[6px_6px_0px_0px_#D58C46] hover:shadow-none hover:translate-x-1.5 hover:translate-y-1.5 transition-all"
+        >
+          Schedule a Free Estimate
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="#D58C46" stroke="none" aria-hidden="true"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+        </a>
+      </div>
+
+    </div>
+  </div>
+</section>

@@ -1,0 +1,31 @@
+name: Compress Images
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'public/**.jpg'
+      - 'public/**.jpeg'
+      - 'public/**.png'
+      - 'public/**.webp'
+  pull_request:
+    paths:
+      - 'public/**.jpg'
+      - 'public/**.jpeg'
+      - 'public/**.png'
+      - 'public/**.webp'
+  workflow_dispatch:
+
+jobs:
+  build:
+    name: calibreapp/image-actions
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repo
+        uses: actions/checkout@v4
+      
+      - name: Compress Images
+        uses: calibreapp/image-actions@main
+        with:
+          githubToken: ${{ secrets.GITHUB_TOKEN }}
+          compressOnly: true

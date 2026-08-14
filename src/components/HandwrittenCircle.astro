@@ -1,0 +1,95 @@
+---
+interface Props {
+  text?: string;
+  strokeColor?: string;
+  class?: string;
+}
+
+const {
+  text = "Call the electrician",
+  strokeColor = "#D58C46",
+  class: className = "",
+} = Astro.props;
+
+const id = `hwc-${Math.random().toString(36).slice(2, 8)}`;
+---
+
+<section class={`relative w-full bg-white py-14 sm:py-20 overflow-hidden ${className}`}>
+  <div id={id} class="relative max-w-xl mx-auto px-6 flex items-center justify-center">
+
+    <!-- Hand-drawn oval (drawn on scroll-into-view) -->
+    <svg
+      class="absolute inset-0 w-full h-full pointer-events-none overflow-visible"
+      viewBox="0 0 580 140"
+      preserveAspectRatio="none"
+      aria-hidden="true"
+    >
+      <!-- Slightly wobbly oval, starts at right side and sweeps around -->
+      <path
+        id={`${id}-p`}
+        d="M 510 28
+           C 610 70, 545 126, 290 132
+           C 70 132, 18 106, 18 70
+           C 18 34, 110 14, 290 14
+           C 460 14, 510 52, 510 52"
+        fill="none"
+        stroke={strokeColor}
+        stroke-width="6"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      />
+    </svg>
+
+    <!-- Text -->
+    <div
+      id={`${id}-t`}
+      class="relative z-10 py-9 px-10 text-center"
+      style="opacity:0;transform:translateY(12px)"
+    >
+      <p class="text-2xl sm:text-3xl md:text-4xl font-black uppercase tracking-tight text-black leading-tight">
+        {text}
+      </p>
+    </div>
+
+  </div>
+
+  <!-- Small "todo" label above -->
+  <p
+    id={`${id}-label`}
+    class="text-center text-[10px] font-black uppercase tracking-widest text-black/25 mt-5"
+    style="opacity:0"
+  >
+    On your list today
+  </p>
+</section>
+
+<script define:vars={{ id }}>
+  (function () {
+    const container = document.getElementById(id);
+    const path      = document.getElementById(id + '-p');
+    const textEl    = document.getElementById(id + '-t');
+    const labelEl   = document.getElementById(id + '-label');
+    if (!container || !path) return;
+
+    // Set up stroke-dash for drawing animation
+    const len = path.getTotalLength ? path.getTotalLength() : 1400;
+    path.style.strokeDasharray  = len;
+    path.style.strokeDashoffset = len;
+    path.style.transition = `stroke-dashoffset 2.2s cubic-bezier(0.43, 0.13, 0.23, 0.96)`;
+
+    if (textEl)  textEl.style.transition  = 'opacity 0.7s 0.6s ease, transform 0.7s 0.6s ease';
+    if (labelEl) labelEl.style.transition = 'opacity 0.6s 1.4s ease';
+
+    let done = false;
+    new IntersectionObserver(([entry]) => {
+      if (entry.isIntersecting && !done) {
+        done = true;
+        requestAnimationFrame(() => {
+          path.style.strokeDashoffset = '0';
+          if (textEl)  { textEl.style.opacity  = '1'; textEl.style.transform  = 'translateY(0)'; }
+          if (labelEl) { labelEl.style.opacity = '1'; }
+        });
+      }
+    }, { threshold: 0.4 }).observe(container);
+  })();
+</script>

@@ -1,0 +1,39 @@
+---
+const jobs = [
+  { img: "/assets/panel-electrician.jpg", label: "ELITE PANEL SERVICE" },
+  { img: "/assets/patio-service.jpg",     label: "OUTDOOR SERVICE" },
+  { img: "/assets/ladder-service.jpg",    label: "ELITE REPAIR" },
+  { img: "/assets/job4.png",             label: "PANEL UPGRADES" },
+  { img: "/assets/ev-charger.jpg",        label: "EV CHARGING" },
+];
+---
+
+<section class="bg-white pt-24 md:pt-32 text-black border-t border-black/5" aria-label="Recent job photos">
+  <div class="max-w-7xl mx-auto px-6 md:px-12">
+
+    <div class="text-center mb-20">
+      <h2 class="text-accent font-black text-xs sm:text-sm uppercase tracking-[0.4em] mb-4 italic text-center">Recent Work</h2>
+      <h2 class="text-5xl md:text-7xl lg:text-[72px] font-black italic uppercase tracking-tighter leading-[0.9]">ON SITE IN PHOENIX</h2>
+    </div>
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-6 gap-6">
+      {jobs.map((job, i) => (
+        <div class={`relative group overflow-hidden border-2 border-black aspect-square ${i < 2 ? 'lg:col-span-3 lg:aspect-video' : 'lg:col-span-2'}`}>
+          <img
+            src={job.img}
+            alt={job.label}
+            loading="lazy"
+            decoding="async"
+            class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 cursor-zoom-in"
+          />
+          <div class="absolute inset-0 transition-colors flex items-center justify-center">
+            <div class="text-white font-black italic uppercase text-[10px] tracking-widest border border-white/40 px-4 py-2 opacity-0 group-hover:opacity-100 transition-opacity">
+              {job.label}
+            </div>
+          </div>
+        </div>
+      ))}
+    </div>
+
+  </div>
+</section>

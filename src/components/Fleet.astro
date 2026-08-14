@@ -1,0 +1,51 @@
+---
+const props = [
+  { title: "Upfront, Honest Pricing",  desc: "No hidden fees or surprise costs. You'll know the price before we strike a single wire." },
+  { title: "Clear, Expert Solutions",  desc: "We don't just fix it; we show you why it happened and how to ensure your home's long-term safety." },
+  { title: "Same-Day Dispatch",        desc: "Electrical issues are urgent. We offer fast, local response times to get your life back on track today." },
+];
+---
+
+<section class="bg-white pt-24 md:pt-32 pb-8 relative" aria-label="About SDG Electric">
+  <div class="max-w-7xl mx-auto px-6 md:px-12 grid lg:grid-cols-5 gap-12 lg:gap-16 items-stretch">
+
+    <!-- Image — 2 cols -->
+    <div class="lg:col-span-2 order-2 lg:order-1 flex flex-col">
+      <div class="relative group flex-1 min-h-[300px] shadow-[24px_24px_0px_0px_#D58C46]">
+        <img
+          src="/assets/team.webp"
+          alt="The SDG Electric Crew"
+          loading="lazy"
+          decoding="async"
+          class="w-full h-full object-cover border-2 border-black bg-white"
+        />
+        <div class="absolute bottom-6 left-6 bg-black text-white px-6 py-4 font-black italic uppercase text-[10px] tracking-[0.3em] border border-white/20">
+          THE SDG ELECTRIC CREW
+        </div>
+      </div>
+    </div>
+
+    <!-- Copy — 3 cols -->
+    <div class="lg:col-span-3 space-y-8 order-1 lg:order-2 flex flex-col justify-center">
+      <p class="text-accent font-black text-xs sm:text-sm uppercase tracking-[0.4em] italic">Always Local</p>
+      <h2 class="text-5xl md:text-7xl lg:text-[72px] font-black uppercase italic leading-[0.9] tracking-tighter">ELITE SKILL. <br />LOCAL HEART.</h2>
+      <p class="text-black/70 font-medium leading-relaxed text-xl">
+        You deserve an electrician who actually knows your block. Our specialized North Phoenix team is equipped to resolve most electrical issues in a single visit—getting you back to normal without the wait.
+      </p>
+      <div class="space-y-6">
+        {props.map((prop) => (
+          <div class="flex items-start gap-4 group">
+            <div class="mt-1 bg-black p-1 shrink-0">
+              <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="#D58C46" stroke="none"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+            </div>
+            <div>
+              <p class="text-black font-black uppercase italic text-base tracking-widest mb-1">{prop.title}</p>
+              <p class="text-black/50 text-base font-medium leading-relaxed">{prop.desc}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+
+  </div>
+</section>

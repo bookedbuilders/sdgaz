@@ -1,0 +1,75 @@
+---
+import '../styles/global.css';
+
+interface Props {
+  title?: string;
+  description?: string;
+}
+
+const {
+  title = "Electrician in Phoenix | Fast, Safe Service | SDG Electric",
+  description = "Reliable electrician in Phoenix, AZ. SDG Electric provides electrical repair, installation, and 24/7 emergency service you can trust. Call us!",
+} = Astro.props;
+---
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <!-- Preload LCP image (hero logo) before browser discovers it in HTML -->
+    <link rel="preload" as="image" href="/assets/logo.png" fetchpriority="high" />
+    <!-- Preconnect to external origins so DNS+TLS is ready when scripts load -->
+    <link rel="preconnect" href="https://www.googletagmanager.com" />
+    <link rel="preconnect" href="https://cdn-embed-script.recreateai.com" />
+    <link rel="preconnect" href="https://form.recreateai.com" />
+    <link rel="dns-prefetch" href="https://www.google-analytics.com" />
+    <link rel="dns-prefetch" href="//form.recreateai.com" />
+    <!-- GTM/GA: stub dataLayer so events queue before scripts arrive, inject scripts after load -->
+    <script is:inline>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'AW-17639730806');
+      gtag('config', 'G-CXLYZDNFYZ');
+      gtag('config', 'AW-17639730806/BXJACJ-uxtgbEPbco9tB', {'phone_conversion_number': '(614) 697-1359'});
+      window.addEventListener('load', function() {
+        // GTM
+        (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-TGD7D98V');
+        // GA4
+        var s=document.createElement('script');s.async=true;s.src='https://www.googletagmanager.com/gtag/js?id=AW-17639730806';document.head.appendChild(s);
+        // RecreateAI booking widget — injected after load so it never competes with FCP
+        var rai=document.createElement('script');
+        rai.async=true;
+        rai.src='https://cdn-embed-script.recreateai.com/production-rai-embed.js';
+        rai.setAttribute('rai-data-company-pak','57aa3ca2-4a06-4329-b414-f9695d418558');
+        rai.setAttribute('rai-form-url','https://form.recreateai.com');
+        rai.setAttribute('rai-data-load-form','true');
+        rai.setAttribute('rai-form-loading-primary-color','#F8CF0F');
+        rai.setAttribute('rai-form-primary-pastel-color','#fae26f');
+        rai.setAttribute('rai-data-load-webchat','false');
+        document.body.appendChild(rai);
+      });
+    </script>
+  </head>
+  <body class="antialiased text-[#212121] overflow-x-hidden">
+    <!-- GTM noscript -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-TGD7D98V" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- SVG filter for logo white outline -->
+    <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+      <defs>
+        <filter id="logo-stroke">
+          <feMorphology in="SourceAlpha" operator="dilate" radius="4" result="DILATED" />
+          <feFlood flood-color="white" flood-opacity="1" result="WHITE" />
+          <feComposite in="WHITE" in2="DILATED" operator="in" result="OUTLINE" />
+          <feMerge>
+            <feMergeNode in="OUTLINE" />
+            <feMergeNode in="SourceGraphic" />
+          </feMerge>
+        </filter>
+      </defs>
+    </svg>
+    <slot />
+  </body>
+</html>

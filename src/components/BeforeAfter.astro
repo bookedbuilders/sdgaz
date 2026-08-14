@@ -1,0 +1,56 @@
+---
+interface Props {
+  before?: {
+    label?: string;
+    badge?: string;
+    badgeColor?: string;
+    icon?: string;
+    desc?: string;
+  };
+  after?: {
+    label?: string;
+    badge?: string;
+    icon?: string;
+    desc?: string;
+  };
+}
+
+const {
+  before = {
+    label: "Before",
+    badge: "Fire Risk",
+    badgeColor: "bg-red-600",
+    icon: "⚠️",
+    desc: "Federal Pacific Stab-Lok — 100A — Est. 1974",
+  },
+  after = {
+    label: "After",
+    badge: "Code Compliant",
+    icon: "✅",
+    desc: "Modern 200A Load Center — Code-Compliant — 10-Year Warranty",
+  },
+} = Astro.props;
+---
+
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+  <!-- Before -->
+  <div class="relative border border-white/10 aspect-[4/3] flex items-center justify-center overflow-hidden">
+    <div class="absolute inset-0 bg-red-900/40"></div>
+    <div class="relative z-10 text-center p-8">
+      <div class="text-5xl mb-4">{before.icon}</div>
+      <div class={`inline-block ${before.badgeColor ?? 'bg-red-600'} text-white text-xs font-black uppercase tracking-widest px-3 py-1 mb-4`}>{before.badge}</div>
+      <h3 class="font-black text-3xl uppercase italic tracking-tighter leading-tight mb-2">{before.label}</h3>
+      <p class="text-white/60 font-medium text-sm">{before.desc}</p>
+    </div>
+  </div>
+  <!-- After -->
+  <div class="relative border border-accent/30 aspect-[4/3] flex items-center justify-center overflow-hidden">
+    <div class="absolute inset-0 bg-accent/10"></div>
+    <div class="relative z-10 text-center p-8">
+      <div class="text-5xl mb-4">{after.icon}</div>
+      <div class="inline-block bg-black border border-accent text-accent text-xs font-black uppercase tracking-widest px-3 py-1 mb-4">{after.badge}</div>
+      <h3 class="font-black text-3xl uppercase italic tracking-tighter leading-tight mb-2 text-accent">{after.label}</h3>
+      <p class="text-white/60 font-medium text-sm">{after.desc}</p>
+    </div>
+  </div>
+</div>

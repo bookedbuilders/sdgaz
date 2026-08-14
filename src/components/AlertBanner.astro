@@ -1,0 +1,16 @@
+---
+interface Props {
+  text: string;
+  duration?: string;
+}
+const { text, duration = '20s' } = Astro.props;
+---
+<div class="bg-accent/10 backdrop-blur-sm border-b border-accent/25 text-accent py-2 overflow-hidden whitespace-nowrap" style="box-shadow:0 2px 24px rgba(213,140,70,0.12)">
+  <!-- Mobile: scrolling marquee -->
+  <div class="sm:hidden flex w-max animate-marquee" style={`animation-duration:${duration}`}>
+    <span class="text-sm font-black uppercase italic tracking-widest flex-shrink-0 pr-16">{text}</span>
+    <span class="text-sm font-black uppercase italic tracking-widest flex-shrink-0 pr-16" aria-hidden="true">{text}</span>
+  </div>
+  <!-- Desktop: static centered -->
+  <div class="hidden sm:block text-center text-sm font-black uppercase italic tracking-widest px-4">{text}</div>
+</div>

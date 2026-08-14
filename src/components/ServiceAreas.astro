@@ -1,0 +1,65 @@
+---
+const areas = [
+  "ANTHEM",        "NEW RIVER",
+  "CAVE CREEK",    "TRAMONTO",
+  "NORTERRA",      "DEER VALLEY",
+  "MOON VALLEY",   "CENTRAL PHOENIX",
+];
+---
+
+<section id="service-areas" class="pt-24 pb-24 md:pt-32 md:pb-32 bg-white text-black" aria-label="Service areas">
+  <div class="max-w-7xl mx-auto px-6 md:px-12">
+    <div class="grid lg:grid-cols-2 gap-16 md:gap-24 items-center">
+
+      <!-- Copy -->
+      <div class="order-1">
+        <p class="text-accent font-black text-xs sm:text-sm uppercase tracking-[0.4em] mb-4 italic">Local Presence</p>
+        <h2 class="text-5xl md:text-7xl lg:text-[72px] font-black italic uppercase leading-[0.9] tracking-tighter mb-12">THE BEST <br />IN PHOENIX.</h2>
+
+        <!-- Mobile Map -->
+        <div class="block lg:hidden mb-12 relative group shadow-[24px_24px_0px_0px_#D58C46]">
+          <img src="/assets/phoenix-map.webp" alt="Phoenix Service Map" loading="lazy" decoding="async" class="w-full h-auto border-2 border-black" />
+          <div class="absolute top-4 right-4 bg-black text-white px-3 py-1.5 font-black italic uppercase text-[10px] tracking-widest border border-white/20">
+            ACTIVE SERVICE ZONE
+          </div>
+        </div>
+
+        <!-- Mobile Disclaimer -->
+        <div class="block lg:hidden mb-12 p-8 border-l-4 border-accent bg-black/5">
+          <p class="font-black italic uppercase text-sm tracking-widest mb-2">DON'T SEE YOUR SUBURB?</p>
+          <p class="text-black/60 font-medium">We cover everything from Anthem down to Central Phoenix. If you're within 30 minutes of Carefree Highway and I-17, we've got you covered.</p>
+        </div>
+
+        <div class="grid grid-cols-2 gap-x-12 gap-y-6">
+          {areas.map((area) => (
+            <div class="flex items-center gap-3 group">
+              <div class="w-2 h-2 bg-accent rotate-45 group-hover:scale-150 transition-transform"></div>
+              <span class="font-black italic uppercase text-lg sm:text-xl tracking-tighter">{area}</span>
+            </div>
+          ))}
+        </div>
+
+        <!-- Desktop Disclaimer -->
+        <div class="hidden lg:block mt-12 p-8 border-l-4 border-accent bg-black/5 relative z-10">
+          <p class="font-black italic uppercase text-sm tracking-widest mb-2">DON'T SEE YOUR SUBURB?</p>
+          <p class="text-black/60 font-medium">We cover everything from Anthem down to Central Phoenix. If you're within 30 minutes of Carefree Highway and I-17, we've got you covered.</p>
+        </div>
+      </div>
+
+      <!-- Desktop Map -->
+      <div class="order-2 relative group h-full hidden lg:block shadow-[24px_24px_0px_0px_#D58C46]">
+        <img
+          src="/assets/phoenix-map.webp"
+          alt="Phoenix Service Map"
+          loading="lazy"
+          decoding="async"
+          class="w-full h-full object-cover border-2 border-black"
+        />
+        <div class="absolute top-6 right-6 bg-black text-white px-4 py-2 font-black italic uppercase text-[10px] tracking-widest border border-white/20">
+          ACTIVE SERVICE ZONE
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>

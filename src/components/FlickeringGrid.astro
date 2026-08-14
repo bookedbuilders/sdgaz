@@ -1,0 +1,111 @@
+---
+interface Props {
+  color?: string;
+  maxOpacity?: number;
+  flickerChance?: number;
+  squareSize?: number;
+  gridGap?: number;
+  class?: string;
+}
+
+const {
+  color = "#D58C46",
+  maxOpacity = 0.12,
+  flickerChance = 0.15,
+  squareSize = 4,
+  gridGap = 6,
+  class: className = "",
+} = Astro.props;
+
+const id = `fg-${Math.random().toString(36).slice(2, 8)}`;
+---
+
+<div id={id} class={`absolute inset-0 ${className}`}>
+  <canvas class="pointer-events-none w-full h-full"></canvas>
+</div>
+
+<script define:vars={{ id, color, maxOpacity, flickerChance, squareSize, gridGap }}>
+  // Defer canvas init until browser is idle so it never competes with FCP paint
+  (function () {
+    function init() {
+    const container = document.getElementById(id);
+    const canvas = container.querySelector('canvas');
+    const ctx = canvas.getContext('2d');
+
+    // Convert any CSS color string → "rgba(r, g, b," prefix
+    const toRGBA = (c) => {
+      const el = document.createElement('canvas');
+      el.width = el.height = 1;
+      const cx = el.getContext('2d');
+      cx.fillStyle = c;
+      cx.fillRect(0, 0, 1, 1);
+      const [r, g, b] = cx.getImageData(0, 0, 1, 1).data;
+      return `rgba(${r},${g},${b},`;
+    };
+
+    const prefix = toRGBA(color);
+    let cols, rows, squares, dpr;
+    let animId;
+    let isInView = false;
+    let lastFrameTime = 0;
+    const FRAME_INTERVAL = 1000 / 12; // ~12 fps — flicker doesn't need 60
+
+    function setup() {
+      const w = container.clientWidth;
+      const h = container.clientHeight;
+      if (!w || !h) return;
+      dpr = window.devicePixelRatio || 1;
+      canvas.width = w * dpr;
+      canvas.height = h * dpr;
+      canvas.style.width = w + 'px';
+      canvas.style.height = h + 'px';
+      cols = Math.floor(w / (squareSize + gridGap));
+      rows = Math.floor(h / (squareSize + gridGap));
+      squares = new Float32Array(cols * rows);
+      for (let i = 0; i < squares.length; i++) squares[i] = Math.random() * maxOpacity;
+    }
+
+    function draw() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      for (let i = 0; i < cols; i++) {
+        for (let j = 0; j < rows; j++) {
+          ctx.fillStyle = `${prefix}${squares[i * rows + j]})`;
+          ctx.fillRect(
+            i * (squareSize + gridGap) * dpr,
+            j * (squareSize + gridGap) * dpr,
+            squareSize * dpr,
+            squareSize * dpr
+          );
+        }
+      }
+    }
+
+    function animate(time) {
+      if (!isInView) return;
+      animId = requestAnimationFrame(animate);
+      if (time - lastFrameTime < FRAME_INTERVAL) return;
+      // Cap delta to 100ms so slow/throttled frames don't cause a burst of flicker
+      const delta = Math.min((time - lastFrameTime) / 1000, 0.1);
+      lastFrameTime = time;
+      for (let i = 0; i < squares.length; i++) {
+        if (Math.random() < flickerChance * delta) squares[i] = Math.random() * maxOpacity;
+      }
+      draw();
+    }
+
+    setup();
+    new ResizeObserver(setup).observe(container);
+    new IntersectionObserver(([entry]) => {
+      isInView = entry.isIntersecting;
+      if (isInView) animId = requestAnimationFrame(animate);
+      else cancelAnimationFrame(animId);
+    }, { threshold: 0 }).observe(canvas);
+    }
+
+    if ('requestIdleCallback' in window) {
+      requestIdleCallback(init, { timeout: 1500 });
+    } else {
+      setTimeout(init, 200);
+    }
+  })();
+</script>

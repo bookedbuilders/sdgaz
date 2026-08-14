@@ -1,0 +1,62 @@
+---
+const rows = [
+  { point: "Booking",  us: "Instant 24/7 Booking",          them: "Voicemail Purgatory" },
+  { point: "Pricing",  us: "Upfront 'No-Surprise' Quotes",  them: "Vague Hourly Estimates" },
+  { point: "Arrival",  us: "Real-Time GPS Tracking",        them: "\"We'll be there between 8 and 4\"" },
+  { point: "Cleaning", us: "Clean-Work Guarantee",          them: "Dust & Wire Strips on Your Floor" },
+  { point: "Crew",     us: "Elite Licensed Pros",           them: "\"Handymen\" with a Voltmeter" },
+];
+---
+
+<section class="pt-24 pb-24 md:pt-32 md:pb-32 bg-black text-white" aria-label="Why choose SDG Electric">
+  <div class="max-w-7xl mx-auto px-6 md:px-12">
+
+    <div class="text-center mb-16 md:mb-24">
+      <p class="text-accent font-black text-xs sm:text-sm uppercase tracking-[0.4em] mb-4 italic">The SDG Electric Difference</p>
+      <h2 class="text-5xl md:text-7xl lg:text-[72px] font-black italic uppercase tracking-tighter leading-[0.9]">WHY NEIGHBORS <br />CHOOSE US</h2>
+      <p class="mt-8 text-white/60 text-xl leading-relaxed max-w-2xl mx-auto font-medium">
+        We don't just show up—we solve it. Here is how we beat the 'other guys' in Phoenix.
+      </p>
+    </div>
+
+    <div class="border-2 border-white/20 shadow-[12px_12px_0px_0px_rgba(213,140,70,0.15)] bg-black relative">
+      <div class="absolute inset-y-0 left-0 w-1/2 bg-accent/20 blur-[100px] -z-10 pointer-events-none"></div>
+
+      <table class="w-full border-collapse">
+        <thead>
+          <tr class="grid grid-cols-2 border-b-2 border-white/20 relative">
+            <th scope="col" class="bg-accent p-4 md:p-8 text-center border-r-2 border-white/20 relative z-30">
+              <p class="text-white/60 text-[8px] md:text-sm font-black uppercase tracking-widest mb-1 italic">The Best</p>
+              <p class="text-xl md:text-4xl font-black italic uppercase tracking-tighter text-white">SDG ELECTRIC</p>
+            </th>
+            <th scope="col" class="bg-white p-4 md:p-8 text-center relative z-10">
+              <p class="text-zinc-400/60 text-[8px] md:text-sm font-black uppercase tracking-widest mb-1 italic">The Others</p>
+              <p class="text-xl md:text-4xl font-black italic uppercase tracking-tighter text-zinc-600">Average Pros</p>
+            </th>
+          </tr>
+        </thead>
+        <tbody class="divide-y-2 divide-white/20 relative">
+          {rows.map((row) => (
+            <tr class="grid grid-cols-2 relative group">
+              <th scope="row" class="sr-only">{row.point}</th>
+              <td class="p-5 md:p-12 bg-accent flex flex-col items-center justify-center text-center border-r-2 border-white/20 group/us hover:bg-black transition-all duration-300 relative z-30">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mb-3 md:mb-4"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+                <p class="text-xs md:text-xl font-black italic uppercase tracking-tighter text-white">{row.us}</p>
+              </td>
+              <td class="p-5 md:p-12 bg-white flex flex-col items-center justify-center text-center group/them relative z-10">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="rgba(82,82,91,0.4)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mb-3 md:mb-4"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+                <p class="text-xs md:text-xl font-black italic uppercase tracking-tighter text-zinc-600">{row.them}</p>
+              </td>
+              <div class="absolute inset-0 flex items-center justify-center pointer-events-none z-10">
+                <span class="bg-white text-black px-3 py-1 text-[7px] md:text-[10px] font-black uppercase italic tracking-widest border border-accent shadow-2xl opacity-0 md:group-hover:opacity-100 transition-opacity">
+                  {row.point}
+                </span>
+              </div>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+
+  </div>
+</section>

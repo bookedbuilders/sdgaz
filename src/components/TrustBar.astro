@@ -1,0 +1,55 @@
+---
+const stats = [
+  { val: "1.2K+", label: "Local Jobs Done" },
+  { val: "5",     label: "Star Google Rating" },
+  { val: "100%",  label: "Licensed Electricians" },
+  { val: "24/7",  label: "Immediate Dispatch" },
+];
+
+const badges = [
+  { src: "/assets/yelp.webp",         alt: "Yelp",                      noFilter: true  },
+  { src: "/assets/thumbtack.webp",    alt: "Thumbtack",                 noFilter: false },
+  { src: "/assets/home-advisor.webp", alt: "Home Advisor Top Rated",    noFilter: true,  larger: true },
+  { src: "/assets/angi.webp",         alt: "Angi",                      noFilter: false },
+];
+---
+
+<section class="bg-black pt-12 pb-24 md:pt-16 md:pb-32 text-white" aria-label="Trusted platforms and service statistics">
+  <div class="max-w-7xl mx-auto px-0 md:px-12">
+
+    <!-- Logos Marquee -->
+    <div class="relative w-full overflow-hidden mb-12">
+      <div class="absolute inset-y-0 left-0 w-12 md:w-24 bg-gradient-to-r from-black to-transparent z-10 pointer-events-none"></div>
+      <div class="absolute inset-y-0 right-0 w-12 md:w-24 bg-gradient-to-l from-black to-transparent z-10 pointer-events-none"></div>
+      <div class="flex w-[200%] animate-marquee">
+        {[1, 2].map((_, i) => (
+          <div class="flex w-1/2 items-center shrink-0" aria-hidden={i === 1 ? "true" : undefined}>
+            {badges.map((badge) => (
+              <div class="flex-1 flex items-center justify-center px-4">
+                <img
+                  src={badge.src}
+                  alt={badge.alt}
+                  loading="lazy"
+                  decoding="async"
+                  class={`h-8 sm:h-10 md:h-12 lg:h-14 w-auto shrink-0 object-contain transition-opacity duration-300 opacity-40 hover:opacity-100 ${badge.larger ? 'scale-125' : ''} ${!badge.noFilter ? 'brightness-0 invert' : ''}`}
+                />
+              </div>
+            ))}
+          </div>
+        ))}
+      </div>
+    </div>
+
+    <!-- Stats -->
+    <div class="bg-white/5 border border-white/10 p-8 md:p-12 mt-6 md:mt-10 grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-12 text-center mx-6 md:mx-0 shadow-[12px_12px_0px_0px_rgba(213,140,70,0.15)] relative">
+      <div class="absolute inset-0 bg-accent/5 blur-2xl pointer-events-none"></div>
+      {stats.map((stat) => (
+        <div class="group cursor-default relative z-10">
+          <p class="text-white text-4xl sm:text-5xl md:text-7xl font-black italic group-hover:text-accent transition-colors">{stat.val}</p>
+          <p class="text-white/50 font-black uppercase text-[10px] tracking-widest mt-2 italic">{stat.label}</p>
+        </div>
+      ))}
+    </div>
+
+  </div>
+</section>

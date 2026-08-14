@@ -1,0 +1,113 @@
+---
+interface Stat {
+  val: string;
+  label: string;
+}
+
+interface Review {
+  name: string;
+  location?: string;
+  text: string;
+}
+
+interface Props {
+  stats?: Stat[];
+  reviews?: Review[];
+  eyebrow?: string;
+  headline?: string; // HTML allowed
+}
+
+const DEFAULT_STATS: Stat[] = [
+  { val: "90%",  label: "Same Day Service" },
+  { val: "1/3",  label: "Lower Than Franchise" },
+  { val: "100%", label: "Satisfaction Guaranteed" },
+  { val: "24/7", label: "Around The Clock Availability" },
+];
+
+const DEFAULT_REVIEWS: Review[] = [
+  {
+    name: "Mike O.",
+    location: "ANTHEM, AZ",
+    text: "We've hired SDG Electric three times—outlet upgrades, a full breaker box replacement with outbuilding power, and new fans with recessed lighting. Every time, communication is great, the work is done right, and they don't leave until it's perfect. Highly recommend!",
+  },
+  {
+    name: "Karen L.",
+    location: "Moon Valley, AZ",
+    text: "SDG Electric was willing to work with me and kept me updated from estimate through installation. They were willing to check into questions I had after get information, rather than guessing and giving misinformation. Thank you for your professionalism.",
+  },
+];
+
+const {
+  stats = DEFAULT_STATS,
+  reviews = DEFAULT_REVIEWS,
+  eyebrow = "Real Stories",
+  headline = 'PHOENIX\'S <br />MOST TRUSTED <br /><span class="text-accent">ELECTRICIAN.</span>',
+} = Astro.props;
+---
+
+<section id="reviews" class="pt-24 md:pt-32 pb-6 bg-black text-white" aria-label="Customer reviews">
+  <div class="max-w-7xl mx-auto px-6 md:px-12">
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24 items-stretch">
+
+      <!-- Left: Headline + Stats -->
+      <div class="flex flex-col items-center lg:items-start">
+        <p class="text-accent font-black text-xs sm:text-sm uppercase tracking-[0.4em] mb-6 italic text-center lg:text-left w-full">{eyebrow}</p>
+        <div class="flex-1 flex flex-col w-full">
+          <div class="flex-1 flex flex-col justify-start items-center lg:items-start text-center lg:text-left mb-16 lg:mb-0">
+            <h2 class="text-5xl md:text-7xl lg:text-[72px] font-black uppercase italic tracking-tighter leading-[0.9]" set:html={headline} />
+            <div class="mt-6 flex flex-col gap-1 items-center lg:items-start">
+              <div class="flex items-center gap-3">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 272 92" class="h-5 md:h-6 object-contain" aria-label="Google" role="img">
+                  <path fill="#EA4335" d="M115.75 47.18c0 12.77-9.99 22.18-22.25 22.18s-22.25-9.41-22.25-22.18C71.25 34.32 81.24 25 93.5 25s22.25 9.32 22.25 22.18zm-9.74 0c0-7.98-5.79-13.44-12.51-13.44S80.99 39.2 80.99 47.18c0 7.9 5.79 13.44 12.51 13.44s12.51-5.55 12.51-13.44z"/>
+                  <path fill="#FBBC05" d="M163.75 47.18c0 12.77-9.99 22.18-22.25 22.18s-22.25-9.41-22.25-22.18c0-12.85 9.99-22.18 22.25-22.18s22.25 9.32 22.25 22.18zm-9.74 0c0-7.98-5.79-13.44-12.51-13.44s-12.51 5.46-12.51 13.44c0 7.9 5.79 13.44 12.51 13.44s12.51-5.55 12.51-13.44z"/>
+                  <path fill="#4285F4" d="M209.75 26.34v39.82c0 16.38-9.66 23.07-21.08 23.07-10.75 0-17.22-7.19-19.67-13.07l8.48-3.53c1.51 3.61 5.21 7.87 11.17 7.87 7.31 0 11.84-4.51 11.84-13v-3.19h-.34c-2.18 2.69-6.38 5.04-11.68 5.04-11.09 0-21.25-9.66-21.25-22.09 0-12.52 10.16-22.26 21.25-22.26 5.29 0 9.49 2.35 11.68 4.96h.34v-3.61h9.26zm-8.56 20.92c0-7.81-5.21-13.52-11.84-13.52-6.72 0-12.35 5.71-12.35 13.52 0 7.73 5.63 13.36 12.35 13.36 6.63 0 11.84-5.63 11.84-13.36z"/>
+                  <path fill="#34A853" d="M225 3v65h-9.5V3h9.5z"/>
+                  <path fill="#EA4335" d="M262.02 54.48l7.56 5.04c-2.44 3.61-8.32 9.83-18.48 9.83-12.6 0-22.01-9.74-22.01-22.18 0-13.19 9.49-22.18 20.92-22.18 11.51 0 17.14 9.16 18.98 14.11l1.01 2.52-29.65 12.28c2.27 4.45 5.8 6.72 10.75 6.72 4.96 0 8.4-2.44 10.92-6.14zm-23.27-7.98l19.82-8.23c-1.09-2.77-4.37-4.7-8.23-4.7-4.95 0-11.84 4.37-11.59 12.93z"/>
+                  <path fill="#4285F4" d="M35.29 41.41V32h31.36c.31 1.64.47 3.58.47 5.68 0 7.06-1.93 15.79-8.15 22.01-6.05 6.3-13.78 9.66-24.02 9.66C15.96 69.35.5 54.4.5 35.02.5 15.64 15.96.69 34.85.69c10.5 0 17.98 4.12 23.6 9.49l-6.64 6.64c-4.03-3.78-9.5-6.72-16.97-6.72-13.86 0-24.7 11.17-24.7 25.03 0 13.86 10.84 25.03 24.7 25.03 8.99 0 14.11-3.61 17.39-6.89 2.66-2.66 4.41-6.46 5.1-11.65l-22.04.29z"/>
+                </svg>
+                <div class="flex gap-1 text-accent justify-center lg:justify-start">
+                  {Array.from({length: 5}).map(() => (
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" stroke="none" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                  ))}
+                </div>
+              </div>
+              <p class="text-[10px] font-black uppercase tracking-[0.2em] text-white/50 italic leading-none">180+ 5-STAR REVIEWS</p>
+            </div>
+          </div>
+          <div class="flex-1 grid grid-cols-2 grid-rows-2 gap-4">
+            {stats.map((stat) => (
+              <div class="bg-white/5 border border-white/10 p-6 hover:bg-white/10 transition-all flex flex-col justify-center">
+                <p class="text-4xl md:text-5xl font-black italic uppercase tracking-tighter text-white leading-none mb-2">{stat.val}</p>
+                <p class="text-[10px] font-black uppercase tracking-widest text-white/50 italic leading-tight">{stat.label}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+
+      <!-- Right: Review Cards -->
+      <div class="flex flex-col gap-8">
+        {reviews.map((rev) => (
+          <div class="bg-white text-black p-8 sm:p-12 border-2 border-black shadow-[12px_12px_0px_0px_#D58C46] relative group hover:-translate-x-1 hover:-translate-y-1 transition-transform">
+            <div class="flex items-center gap-4 mb-6 md:mb-8">
+              <div class="w-12 h-12 flex items-center justify-center font-black text-xl border-2 border-black text-accent bg-black">
+                {rev.name[0]}
+              </div>
+              <div>
+                <p class="font-black text-lg uppercase italic tracking-tighter">{rev.name}</p>
+                {rev.location && <p class="text-[10px] font-black uppercase tracking-widest text-black/40 mb-1">{rev.location}</p>}
+                <div class="flex gap-0.5 text-accent">
+                  {Array.from({length: 5}).map(() => (
+                    <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="currentColor" stroke="none" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                  ))}
+                </div>
+              </div>
+            </div>
+            <p class="text-black/70 italic text-lg font-medium leading-relaxed">"{rev.text}"</p>
+          </div>
+        ))}
+      </div>
+
+    </div>
+  </div>
+</section>

@@ -1,0 +1,21 @@
+---
+interface Props {
+  id: string;
+  label: string;
+  isHero?: boolean;
+  class?: string;
+  intrinsicSize?: string;
+}
+
+const { id, label, isHero = false, class: className, intrinsicSize = '500px' } = Astro.props;
+---
+
+<section
+  id={id}
+  aria-label={label}
+  class={className}
+  role={isHero ? 'banner' : undefined}
+  style={isHero ? undefined : `content-visibility: auto; contain-intrinsic-size: auto ${intrinsicSize}`}
+>
+  <slot />
+</section>

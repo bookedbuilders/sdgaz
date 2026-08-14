@@ -1,0 +1,74 @@
+---
+interface Props {
+  dotSize?: number;
+  spacing?: number;
+  duration?: number;
+  colorCycleDuration?: number;
+  backgroundColor?: string;
+  class?: string;
+}
+
+const {
+  dotSize = 8,
+  spacing = 10,
+  duration = 30,
+  colorCycleDuration = 6,
+  backgroundColor = '#ffffff',
+  class: className = '',
+} = Astro.props;
+
+const hexSpacing = +(spacing * 1.732).toFixed(2);
+const halfSpacing = spacing / 2;
+const halfHex = +(hexSpacing / 2).toFixed(2);
+
+const bgImage = [
+  `radial-gradient(circle at 50% 50%, transparent 1.5px, ${backgroundColor} 0 ${dotSize}px, transparent ${dotSize}px)`,
+  `radial-gradient(circle at 50% 50%, transparent 1.5px, ${backgroundColor} 0 ${dotSize}px, transparent ${dotSize}px)`,
+  `radial-gradient(circle at 50% 50%, #f00, transparent 60%)`,
+  `radial-gradient(circle at 50% 50%, #ff0, transparent 60%)`,
+  `radial-gradient(circle at 50% 50%, #0f0, transparent 60%)`,
+  `radial-gradient(ellipse at 50% 50%, #00f, transparent 60%)`,
+].join(', ');
+
+const bgSize = [
+  `${spacing}px ${hexSpacing}px`,
+  `${spacing}px ${hexSpacing}px`,
+  `200% 200%`,
+  `200% 200%`,
+  `200% 200%`,
+  `200% ${hexSpacing}px`,
+].join(', ');
+
+const bgPosFrom = `0px 0px, ${halfSpacing}px ${halfHex}px, 800% 400%, 1000% -400%, -1200% -600%, 400% ${hexSpacing}px`;
+const bgPosTo = `0px 0px, ${halfSpacing}px ${halfHex}px, 0% 0%, 0% 0%, 0% 0%, 0% 0%`;
+
+const id = `gd-${Math.random().toString(36).slice(2, 8)}`;
+---
+
+<div
+  id={id}
+  class={`absolute inset-0 ${className}`}
+  style={`background-color:${backgroundColor};background-image:${bgImage};background-size:${bgSize};background-position:${bgPosFrom};`}
+></div>
+
+<script define:vars={{ id, bgPosFrom, bgPosTo, duration, colorCycleDuration }}>
+  (function () {
+    const style = document.createElement('style');
+    style.textContent = `
+      @keyframes ${id}-pos {
+        from { background-position: ${bgPosFrom}; }
+        to   { background-position: ${bgPosTo}; }
+      }
+      @keyframes ${id}-hue {
+        from { filter: hue-rotate(0deg); }
+        to   { filter: hue-rotate(360deg); }
+      }
+      #${id} {
+        animation:
+          ${id}-pos ${duration}s linear infinite,
+          ${id}-hue ${colorCycleDuration}s linear infinite;
+      }
+    `;
+    document.head.appendChild(style);
+  })();
+</script>

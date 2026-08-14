@@ -1,0 +1,67 @@
+---
+interface Props {
+  phoneNumber?: string;
+}
+const { phoneNumber = '480-415-0660' } = Astro.props;
+---
+
+<section id="incentives" class="pt-24 pb-24 md:pt-32 md:pb-32 bg-white text-black" aria-label="Financing and warranty">
+  <div class="max-w-7xl mx-auto px-6 md:px-12">
+
+    <div class="text-center mb-16 md:mb-24">
+      <p class="text-accent font-black text-xs sm:text-sm uppercase tracking-[0.4em] mb-4 italic">No Excuses</p>
+      <h2 class="text-5xl md:text-7xl lg:text-[72px] font-black italic tracking-tighter uppercase leading-[0.9]">
+        We've Removed <span class="text-accent">Every Barrier.</span>
+      </h2>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-16">
+
+      <!-- 0% Financing -->
+      <div class="border-2 border-black p-10 shadow-[12px_12px_0px_0px_#D58C46]">
+        <div class="text-5xl mb-6">💳</div>
+        <h3 class="font-black text-4xl uppercase italic tracking-tighter leading-[0.9] mb-4 text-accent">0% Financing</h3>
+        <p class="text-black/60 font-medium leading-relaxed mb-6">
+          18-month no-interest plans available through our trusted lending partners. Apply in 60 seconds. Approval decision doesn't impact your credit score. Most homeowners pay under $200/month.
+        </p>
+        <ul class="space-y-2">
+          {["No prepayment penalties", "Approval in minutes", "Soft credit check only"].map((item) => (
+            <li class="flex items-center gap-3 font-black text-sm uppercase italic tracking-wide">
+              <span class="text-accent">✓</span> {item}
+            </li>
+          ))}
+        </ul>
+      </div>
+
+      <!-- 10-Year Warranty -->
+      <div class="border-2 border-black p-10 shadow-[6px_6px_0px_0px_rgba(0,0,0,0.12)]">
+        <div class="text-5xl mb-6">🛡️</div>
+        <h3 class="font-black text-4xl uppercase italic tracking-tighter leading-[0.9] mb-4">10-Year Warranty</h3>
+        <p class="text-black/60 font-medium leading-relaxed mb-6">
+          Every panel we install is backed by a 10-year warranty on our workmanship. If it ever fails due to our installation, we fix it. Free. No runaround, no fine print.
+        </p>
+        <ul class="space-y-2">
+          {["Covers parts and labor", "No hidden exclusions", "Local crew, accountable for the work"].map((item) => (
+            <li class="flex items-center gap-3 font-black text-sm uppercase italic tracking-wide">
+              <span class="text-accent">✓</span> {item}
+            </li>
+          ))}
+        </ul>
+      </div>
+
+    </div>
+
+    <div class="text-center">
+      <p class="text-black/50 font-medium mb-6">Every day with a failing panel is a risk you don't have to take.</p>
+      <a
+        href="https://form.recreateai.com/?rai_pak=57aa3ca2-4a06-4329-b414-f9695d418558"
+        aria-label="Get my free panel assessment"
+        class="schedule-btn-rai inline-flex items-center justify-center gap-3 bg-black text-white px-12 py-5 font-black uppercase text-sm tracking-widest border-2 border-black shadow-[6px_6px_0px_0px_#D58C46] hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-none transition-all"
+      >
+        Schedule a Free Estimate
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="#D58C46" stroke="none" aria-hidden="true"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+      </a>
+    </div>
+
+  </div>
+</section>

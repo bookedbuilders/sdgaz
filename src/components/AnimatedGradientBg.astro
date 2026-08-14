@@ -1,0 +1,78 @@
+---
+interface Props {
+  startingGap?: number;
+  breathing?: boolean;
+  gradientColors?: string[];
+  gradientStops?: number[];
+  animationSpeed?: number;
+  breathingRange?: number;
+  topOffset?: number;
+  class?: string;
+}
+
+const {
+  startingGap = 120,
+  breathing = true,
+  gradientColors = ['#ffffff', '#fcf4ea', '#f7e6d2', '#eec9a2', '#D58C46', '#e0a468', '#ffffff'],
+  gradientStops   = [20, 35, 48, 60, 72, 86, 100],
+  animationSpeed  = 0.015,
+  breathingRange  = 8,
+  topOffset       = 0,
+  class: className = '',
+} = Astro.props;
+
+const id = `agb-${Math.random().toString(36).slice(2, 8)}`;
+---
+
+<div
+  id={id}
+  class={`absolute inset-0 overflow-hidden ${className}`}
+  style="opacity:0;transform:scale(1.5);"
+>
+  <div id={`${id}-g`} class="absolute inset-0"></div>
+</div>
+
+<script define:vars={{ id, startingGap, breathing, gradientColors, gradientStops, animationSpeed, breathingRange, topOffset }}>
+  (function () {
+    const outer = document.getElementById(id);
+    const inner = document.getElementById(id + '-g');
+    if (!outer || !inner) return;
+
+    // Entrance: fade-in + scale down (replaces framer-motion entrance)
+    outer.style.transition = 'opacity 2s cubic-bezier(0.25,0.1,0.25,1), transform 2s cubic-bezier(0.25,0.1,0.25,1)';
+    setTimeout(() => {
+      outer.style.opacity = '1';
+      outer.style.transform = 'scale(1)';
+    }, 50);
+
+    let width = startingGap;
+    let dir = 1;
+    let animId;
+    let isInView = false;
+
+    function buildGradient() {
+      const stops = gradientStops.map((s, i) => `${gradientColors[i]} ${s}%`).join(', ');
+      return `radial-gradient(${width}% ${width + topOffset}% at 50% 20%, ${stops})`;
+    }
+
+    function animate() {
+      if (!isInView) return;
+      if (breathing) {
+        if (width >= startingGap + breathingRange) dir = -1;
+        if (width <= startingGap - breathingRange) dir = 1;
+        width += dir * animationSpeed;
+      }
+      inner.style.background = buildGradient();
+      animId = requestAnimationFrame(animate);
+    }
+
+    // Set gradient immediately so there's no flash
+    inner.style.background = buildGradient();
+
+    new IntersectionObserver(([entry]) => {
+      isInView = entry.isIntersecting;
+      if (isInView) animId = requestAnimationFrame(animate);
+      else cancelAnimationFrame(animId);
+    }, { threshold: 0 }).observe(outer);
+  })();
+</script>
