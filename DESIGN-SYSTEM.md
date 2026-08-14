@@ -86,11 +86,13 @@ section — that's why this cap exists. Do not exceed `text-6xl` outside headlin
   removed (script, preconnects, and all CTA hrefs — CTAs currently have
   `href=""` on purpose until SDG has its own booking form). Do not re-add
   any `recreateai.com` reference.
-- GTM/GA IDs (`GTM-TGD7D98V`, `AW-17639730806`, `G-CXLYZDNFYZ`) are inherited
-  from the previous site and must be swapped to SDG-owned accounts before launch.
+- Analytics: intentionally none. The inherited GTM/GA/Ads tags fired into the
+  previous business's accounts and were fully removed. When SDG has their own
+  GTM/GA/Ads accounts, add the tags in `src/layouts/Base.astro` (marked spot
+  in `<head>`).
 
 ## Phone / identity
 
-- Placeholder tracking number: 480-415-0660 (SDG's real line is 480-536-9456 — not yet swapped in).
+- Phone everywhere: SDG's real line, 480-536-9456 (`tel:+14805369456`).
 - Brand name is "SDG Electric" everywhere. Zero "Dean & Co" references may exist in `src/`.
   Check with: `grep -ri "dean" src/`

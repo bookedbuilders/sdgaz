@@ -20,29 +20,12 @@ const {
     <meta name="description" content={description} />
     <!-- Preload LCP image (hero logo) before browser discovers it in HTML -->
     <link rel="preload" as="image" href="/assets/logo.png" fetchpriority="high" />
-    <!-- Preconnect to external origins so DNS+TLS is ready when scripts load -->
-    <link rel="preconnect" href="https://www.googletagmanager.com" />
-    <link rel="dns-prefetch" href="https://www.google-analytics.com" />
-    <!-- GTM/GA: stub dataLayer so events queue before scripts arrive, inject scripts after load -->
-    <script is:inline>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-      gtag('config', 'AW-17639730806');
-      gtag('config', 'G-CXLYZDNFYZ');
-      gtag('config', 'AW-17639730806/BXJACJ-uxtgbEPbco9tB', {'phone_conversion_number': '(480) 415-0660'});
-      window.addEventListener('load', function() {
-        // GTM
-        (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-TGD7D98V');
-        // GA4
-        var s=document.createElement('script');s.async=true;s.src='https://www.googletagmanager.com/gtag/js?id=AW-17639730806';document.head.appendChild(s);
-
-      });
-    </script>
+    <!-- Analytics: intentionally none. Previous GTM/GA/Ads tags belonged to
+         another business and were removed. Add SDG-owned tags here when ready
+         (see DESIGN-SYSTEM.md, Third-party services). -->
   </head>
   <body class="antialiased text-[#212121] overflow-x-hidden">
-    <!-- GTM noscript -->
-    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-TGD7D98V" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+
     <!-- SVG filter for logo white outline -->
     <svg width="0" height="0" style="position:absolute" aria-hidden="true">
       <defs>
