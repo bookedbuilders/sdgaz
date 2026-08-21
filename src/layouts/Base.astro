@@ -15,6 +15,57 @@ const {
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
+    <!-- Google tag (gtag.js) — Google Ads AW-18374148612, SDG-owned.
+         Base tag only: page views + remarketing. It does NOT record a
+         conversion; that needs an event snippet with a conversion label.
+         See DESIGN-SYSTEM.md, Third-party services. -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=AW-18374148612"></script>
+    <script is:inline>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'AW-18374148612');
+    </script>
+
+    <!-- Event snippet: "Click to call" conversion (AW-18374148612/crk9CK6J1-UcEISEvblE).
+         Google's snippet, with two guards added: bail straight to the call if
+         gtag is missing (ad blockers block googletagmanager.com), and time out
+         after 800ms so a slow ping can never swallow the phone call. -->
+    <script is:inline>
+      function gtag_report_conversion(url) {
+        var fired = false;
+        var callback = function () {
+          if (fired) return;
+          fired = true;
+          if (typeof(url) != 'undefined') {
+            window.location = url;
+          }
+        };
+        if (typeof gtag !== 'function') {
+          callback();
+          return false;
+        }
+        setTimeout(callback, 800);
+        gtag('event', 'conversion', {
+            'send_to': 'AW-18374148612/crk9CK6J1-UcEISEvblE',
+            'value': 1.0,
+            'currency': 'USD',
+            'event_callback': callback
+        });
+        return false;
+      }
+
+      // Every tel: link on the site reports the conversion. Delegated, so links
+      // added later are covered without touching this file.
+      document.addEventListener('click', function (e) {
+        var link = e.target && e.target.closest ? e.target.closest('a[href^="tel:"]') : null;
+        if (!link) return;
+        if (e.metaKey || e.ctrlKey || e.shiftKey || e.button !== 0) return;
+        e.preventDefault();
+        gtag_report_conversion(link.getAttribute('href'));
+      });
+    </script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>{title}</title>
     <meta name="description" content={description} />
@@ -23,9 +74,6 @@ const {
     <!-- Booking survey (GHL) is loaded on idle/intent — warm the connection early -->
     <link rel="preconnect" href="https://api.leadconnectorhq.com" crossorigin />
     <link rel="dns-prefetch" href="//api.leadconnectorhq.com" />
-    <!-- Analytics: intentionally none. Previous GTM/GA/Ads tags belonged to
-         another business and were removed. Add SDG-owned tags here when ready
-         (see DESIGN-SYSTEM.md, Third-party services). -->
   </head>
   <body class="antialiased text-[#212121] overflow-x-hidden">
 
