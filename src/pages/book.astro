@@ -23,9 +23,17 @@ const PHONE_NUMBER = "602-905-5281";
     </header>
 
     <iframe
-      src={SURVEY_URL}
+      id="booking-frame"
+      data-src={SURVEY_URL}
       title="Schedule a free estimate"
       class="w-full flex-1 border-none"
     ></iframe>
+    <script is:inline>
+      (function () {
+        var f = document.getElementById('booking-frame');
+        var base = f.dataset.src;
+        f.src = window.__sdgSurveyUrl ? window.__sdgSurveyUrl(base) : base;
+      })();
+    </script>
   </main>
 </Base>

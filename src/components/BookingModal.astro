@@ -124,7 +124,8 @@ import { SURVEY_URL } from '../config';
     const warm = () => {
       if (warmed) return;
       warmed = true;
-      frame.src = frame.dataset.src!;
+      var base = frame.dataset.src!;
+      frame.src = window.__sdgSurveyUrl ? window.__sdgSurveyUrl(base) : base;
     };
 
     // Own the open/closed state rather than reading dlg.open. The `close` event

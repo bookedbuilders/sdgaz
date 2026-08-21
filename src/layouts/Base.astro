@@ -73,6 +73,27 @@ const {
     <link rel="icon" href="/favicon.ico" sizes="32x32" />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+
+    <!-- Ad attribution: gclid/UTMs land on THIS page, but the booking survey is
+         a cross-origin iframe with its own URL, so it cannot see them. GHL's own
+         embed script reads window.top.location.search, which throws cross-origin
+         and falls back to the iframe's own query string — so the params have to
+         be appended to the iframe src. Stashed in sessionStorage so the click id
+         survives / -> /book navigation. -->
+    <script is:inline>
+      (function () {
+        var qs = window.location.search.slice(1);
+        try {
+          if (qs) sessionStorage.setItem('sdg_params', qs);
+          else qs = sessionStorage.getItem('sdg_params') || '';
+        } catch (e) { /* private mode: fall through with whatever this page has */ }
+        window.__sdgParams = qs;
+        window.__sdgSurveyUrl = function (base) {
+          if (!base || !qs) return base;
+          return base + (base.indexOf('?') > -1 ? '&' : '?') + qs;
+        };
+      })();
+    </script>
     <!-- Preload LCP image (hero logo) before browser discovers it in HTML -->
     <link rel="preload" as="image" href="/assets/logo.png" fetchpriority="high" />
     <!-- Booking survey (GHL) is loaded on idle/intent — warm the connection early -->
