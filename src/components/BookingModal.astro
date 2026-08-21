@@ -1,0 +1,192 @@
+---
+import { SURVEY_URL } from '../config';
+---
+
+<dialog id="booking-modal" aria-label="Schedule a free estimate">
+  <div class="panel">
+    <button type="button" id="booking-close" aria-label="Close booking form">
+      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" aria-hidden="true"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+    </button>
+    <iframe
+      id="booking-frame"
+      data-src={SURVEY_URL}
+      title="Schedule a free estimate"
+      loading="eager"
+    ></iframe>
+  </div>
+</dialog>
+
+<style>
+  dialog {
+    padding: 0;
+    border: none;
+    background: transparent;
+    inset: 0;
+    margin: 0;
+    width: 100%;
+    height: 100%;
+    max-width: 100%;
+    max-height: 100%;
+    /* closed state */
+    opacity: 0;
+    transform: translateY(8px) scale(0.985);
+    transition:
+      opacity 0.22s ease,
+      transform 0.22s ease,
+      overlay 0.22s ease allow-discrete,
+      display 0.22s ease allow-discrete;
+  }
+  dialog[open] {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+  @starting-style {
+    dialog[open] {
+      opacity: 0;
+      transform: translateY(8px) scale(0.985);
+    }
+  }
+
+  dialog::backdrop {
+    background: rgba(27, 27, 27, 0);
+    transition:
+      background 0.22s ease,
+      overlay 0.22s ease allow-discrete,
+      display 0.22s ease allow-discrete;
+  }
+  dialog[open]::backdrop { background: rgba(27, 27, 27, 0.72); }
+  @starting-style {
+    dialog[open]::backdrop { background: rgba(27, 27, 27, 0); }
+  }
+
+  /* Mobile: full-bleed sheet. No offset shadow — it has no surface to fall on. */
+  .panel {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    background: #fff;
+    display: flex;
+  }
+
+  /* Desktop: framed panel on the scrim. Light element on dark surface -> solid
+     accent offset, 12px (content panel) per DESIGN-SYSTEM.md. */
+  @media (min-width: 640px) {
+    dialog {
+      display: grid;
+      place-items: center;
+      width: 100%;
+      height: 100%;
+    }
+    dialog:not([open]) { display: none; }
+    .panel {
+      width: min(560px, calc(100vw - 4rem));
+      height: min(720px, 88dvh);
+      border: 2px solid #1B1B1B;
+      box-shadow: 12px 12px 0px 0px #D58C46;
+    }
+  }
+
+  #booking-close {
+    position: absolute;
+    top: 0;
+    right: 0;
+    z-index: 2;
+    width: 44px;
+    height: 44px;
+    display: grid;
+    place-items: center;
+    background: #1B1B1B;
+    color: #fff;
+    cursor: pointer;
+    border: none;
+  }
+  #booking-close:hover { background: #D58C46; }
+
+  #booking-frame {
+    border: none;
+    width: 100%;
+    height: 100%;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    dialog, dialog::backdrop { transition: none; }
+  }
+</style>
+
+<script>
+  const dlg = document.getElementById('booking-modal') as HTMLDialogElement | null;
+  const frame = document.getElementById('booking-frame') as HTMLIFrameElement | null;
+  const closeBtn = document.getElementById('booking-close');
+
+  if (dlg && frame && typeof dlg.showModal === 'function') {
+    // Load the survey once, ahead of the click, so opening is instant.
+    let warmed = false;
+    const warm = () => {
+      if (warmed) return;
+      warmed = true;
+      frame.src = frame.dataset.src!;
+    };
+
+    // Own the open/closed state rather than reading dlg.open. The `close` event
+    // is not reliable everywhere, and every exit path has to unlock body scroll.
+    let opened = false;
+
+    const openModal = () => {
+      if (opened) return;
+      opened = true;
+      warm();
+      dlg.showModal();
+      document.body.style.overflow = 'hidden';
+      // Give Android back / iOS back-swipe something to close instead of
+      // navigating away from the page.
+      history.pushState({ bookingModal: true }, '');
+    };
+
+    const closeModal = (fromPopstate = false) => {
+      if (!opened) return;
+      opened = false;
+      if (dlg.open) dlg.close();
+      document.body.style.overflow = '';
+      if (!fromPopstate && (history.state as { bookingModal?: boolean } | null)?.bookingModal) {
+        history.back();
+      }
+    };
+
+    document.querySelectorAll<HTMLAnchorElement>('.schedule-btn-rai').forEach((btn) => {
+      btn.addEventListener('pointerenter', warm, { once: true });
+      btn.addEventListener('touchstart', warm, { once: true, passive: true });
+      btn.addEventListener('focus', warm, { once: true });
+      btn.addEventListener('click', (e) => {
+        e.preventDefault();
+        openModal();
+      });
+    });
+
+    closeBtn?.addEventListener('click', () => closeModal());
+
+    // Backdrop click: clicks outside .panel land on the dialog element itself.
+    dlg.addEventListener('click', (e) => {
+      if (e.target === dlg) closeModal();
+    });
+
+    // Escape: handle it ourselves so cleanup always runs, even where the
+    // native cancel/close events do not fire.
+    dlg.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        e.preventDefault();
+        closeModal();
+      }
+    });
+    dlg.addEventListener('cancel', (e) => {
+      e.preventDefault();
+      closeModal();
+    });
+    dlg.addEventListener('close', () => closeModal());
+
+    window.addEventListener('popstate', () => closeModal(true));
+
+    // Fallback warm: after the page is idle, so it never competes with LCP.
+    const idle = window.requestIdleCallback ?? ((cb: () => void) => setTimeout(cb, 2500));
+    window.addEventListener('load', () => idle(() => warm()), { once: true });
+  }
+</script>

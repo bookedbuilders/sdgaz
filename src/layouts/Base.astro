@@ -20,6 +20,9 @@ const {
     <meta name="description" content={description} />
     <!-- Preload LCP image (hero logo) before browser discovers it in HTML -->
     <link rel="preload" as="image" href="/assets/logo.png" fetchpriority="high" />
+    <!-- Booking survey (GHL) is loaded on idle/intent — warm the connection early -->
+    <link rel="preconnect" href="https://api.leadconnectorhq.com" crossorigin />
+    <link rel="dns-prefetch" href="//api.leadconnectorhq.com" />
     <!-- Analytics: intentionally none. Previous GTM/GA/Ads tags belonged to
          another business and were removed. Add SDG-owned tags here when ready
          (see DESIGN-SYSTEM.md, Third-party services). -->

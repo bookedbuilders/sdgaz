@@ -1,0 +1,31 @@
+---
+import Base from '../layouts/Base.astro';
+import { SURVEY_URL } from '../config';
+
+const PHONE_NUMBER = "480-536-9456";
+---
+
+<Base
+  title="Schedule a Free Estimate | SDG Electric"
+  description="Book a free electrical estimate with SDG Electric in Phoenix, AZ. Licensed, insured, and available 24/7."
+>
+  <main class="min-h-dvh bg-white font-sans text-black flex flex-col">
+    <header class="flex items-center justify-between gap-4 px-5 sm:px-10 py-4 border-b-2 border-black">
+      <a href="/" aria-label="SDG Electric home">
+        <img src="/assets/logo.png" alt="SDG Electric" width="120" height="40" class="h-8 w-auto" />
+      </a>
+      <a
+        href={`tel:${PHONE_NUMBER}`}
+        class="font-black uppercase text-xs tracking-widest border-2 border-black px-5 py-3 hover:bg-black hover:text-white transition-all"
+      >
+        Call {PHONE_NUMBER}
+      </a>
+    </header>
+
+    <iframe
+      src={SURVEY_URL}
+      title="Schedule a free estimate"
+      class="w-full flex-1 border-none"
+    ></iframe>
+  </main>
+</Base>

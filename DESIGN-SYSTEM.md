@@ -82,10 +82,24 @@ section — that's why this cap exists. Do not exceed `text-6xl` outside headlin
 
 ## Third-party services
 
+- **Booking: SDG's own GHL survey.** Every booking CTA carries the class
+  `.schedule-btn-rai` and `href="/book"`. `BookingModal.astro` intercepts the
+  click and opens the survey in a `<dialog>`; `/book` renders the same survey
+  full-page as the no-JS fallback and as an ad destination. The survey ID lives
+  in `src/config.ts` — change it there, nowhere else.
+  - The iframe is warmed on hover/touch/focus and again on `requestIdleCallback`
+    after `load`, so the click is instant and the survey never competes with LCP.
+    Do not move the iframe `src` into the markup.
+  - `form_embed.js` is deliberately NOT loaded. The survey is a 9-step,
+    one-question-per-screen layout that fills whatever height it is given and
+    scrolls internally, so the parent-side height-messaging script buys nothing
+    and adds a request plus a race condition.
+  - The close/cleanup path does not rely on the dialog `close` event (it does not
+    fire in every engine). All exits go through `closeModal()`, which is what
+    unlocks body scroll. Do not "simplify" that back to a `close` listener.
 - The RecreateAI booking widget/form belonged to another contractor and was
-  removed (script, preconnects, and all CTA hrefs — CTAs currently have
-  `href=""` on purpose until SDG has its own booking form). Do not re-add
-  any `recreateai.com` reference.
+  removed (script, preconnects, and all CTA hrefs). Do not re-add any
+  `recreateai.com` reference.
 - Analytics: intentionally none. The inherited GTM/GA/Ads tags fired into the
   previous business's accounts and were fully removed. When SDG has their own
   GTM/GA/Ads accounts, add the tags in `src/layouts/Base.astro` (marked spot
