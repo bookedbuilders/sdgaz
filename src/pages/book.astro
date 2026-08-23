@@ -8,6 +8,7 @@ const PHONE_NUMBER = "480-536-9456";
 <Base
   title="Schedule a Free Estimate | SDG Electric"
   description="Book a free electrical estimate with SDG Electric in Phoenix, AZ. Licensed, insured, and available 24/7."
+  noindex={true}
 >
   <main class="min-h-dvh bg-white font-sans text-black flex flex-col">
     <header class="flex items-center justify-between gap-4 px-5 sm:px-10 py-4 border-b-2 border-black">
@@ -35,5 +36,13 @@ const PHONE_NUMBER = "480-536-9456";
         f.src = window.__sdgSurveyUrl ? window.__sdgSurveyUrl(base) : base;
       })();
     </script>
+
+    <footer class="flex items-center justify-between gap-4 px-5 sm:px-10 py-3 border-t-2 border-black text-[10px] font-black uppercase italic tracking-widest">
+      <div class="flex gap-6">
+        <a href="https://sdgaz.com/privacy-policy-2/" target="_blank" rel="noopener" class="text-black/40 hover:text-accent transition-colors">Privacy</a>
+        <a href="https://sdgaz.com/terms-and-conditions/" target="_blank" rel="noopener" class="text-black/40 hover:text-accent transition-colors">Terms</a>
+      </div>
+      <p class="text-black/30">© 2026 SDG Electric</p>
+    </footer>
   </main>
 </Base>
