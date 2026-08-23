@@ -132,12 +132,37 @@ import { SURVEY_URL } from '../config';
     // is not reliable everywhere, and every exit path has to unlock body scroll.
     let opened = false;
 
+    // Scroll lock: body{overflow:hidden} does NOT work here — global.css sets
+    // overflow-x:hidden on <html>, which stops body overflow propagating to the
+    // viewport (and iOS ignores it regardless). Fix the body in place instead
+    // and restore the exact scroll position on close.
+    let savedScrollY = 0;
+    const lockScroll = () => {
+      savedScrollY = window.scrollY;
+      document.documentElement.style.overflow = 'hidden';
+      document.body.style.position = 'fixed';
+      document.body.style.top = `-${savedScrollY}px`;
+      document.body.style.left = '0';
+      document.body.style.right = '0';
+      document.body.style.width = '100%';
+    };
+    const unlockScroll = () => {
+      document.documentElement.style.overflow = '';
+      document.body.style.position = '';
+      document.body.style.top = '';
+      document.body.style.left = '';
+      document.body.style.right = '';
+      document.body.style.width = '';
+      // 'instant' so html{scroll-behavior:smooth} can't animate the restore
+      window.scrollTo({ top: savedScrollY, behavior: 'instant' });
+    };
+
     const openModal = () => {
       if (opened) return;
       opened = true;
       warm();
       dlg.showModal();
-      document.body.style.overflow = 'hidden';
+      lockScroll();
       // Give Android back / iOS back-swipe something to close instead of
       // navigating away from the page.
       history.pushState({ bookingModal: true }, '');
@@ -147,7 +172,7 @@ import { SURVEY_URL } from '../config';
       if (!opened) return;
       opened = false;
       if (dlg.open) dlg.close();
-      document.body.style.overflow = '';
+      unlockScroll();
       if (!fromPopstate && (history.state as { bookingModal?: boolean } | null)?.bookingModal) {
         history.back();
       }
