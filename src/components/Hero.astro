@@ -16,10 +16,10 @@ interface Props {
 const {
   eyebrow,
   headline = 'Electrician near you. <span class="text-accent">Here today.</span>',
-  subheadline = "Licensed local electricians serving the Valley from Surprise to Scottsdale — same-day repairs, 24/7. No hidden fees. No waiting.",
+  subheadline = "Licensed local pros, Surprise to Scottsdale. No hidden fees.",
   badges,
   headlineSizeClass = 'text-[54px] sm:text-[100px] md:text-[128px] lg:text-[148px]',
-  bannerText = '24/7 Emergency Electrical Needs in Phoenix!',
+  bannerText = '24/7 Emergency Electricians — Phoenix',
   bannerDuration = '15s',
 } = Astro.props;
 
@@ -43,7 +43,7 @@ const PHONE_NUMBER = "480-536-9456";
     class="[mask-image:radial-gradient(ellipse_80%_70%_at_50%_50%,white,transparent)]"
   />
 
-  <div class="relative z-10 flex-1 flex flex-col items-center justify-center px-4 pt-12 pb-16 sm:pt-16 sm:pb-20">
+  <div class="relative z-10 flex-1 flex flex-col items-center justify-center px-4 pt-6 pb-12 sm:pt-16 sm:pb-20">
     <div class="flex flex-col items-center text-center max-w-4xl mx-auto w-full">
 
       {eyebrow && (
@@ -67,14 +67,14 @@ const PHONE_NUMBER = "480-536-9456";
       )}
 
       <!-- CTAs -->
-      <div class="flex flex-col items-center mt-10 sm:mt-14 w-full">
+      <div class="flex flex-col items-center mt-8 sm:mt-14 w-full">
         <a
           href="/book"
-          aria-label="Book Now — schedule service"
-          class="schedule-btn-rai flex flex-row items-center justify-center gap-2 sm:gap-3 w-full max-w-sm sm:max-w-md px-4 sm:px-16 py-5 bg-black text-white font-black uppercase text-sm tracking-wide sm:tracking-widest whitespace-nowrap border-2 border-black shadow-[6px_6px_0px_0px_#D58C46] hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-none transition-all"
+          aria-label="Get my free estimate — schedule service"
+          class="schedule-btn-rai flex flex-row items-center justify-center gap-2 sm:gap-3 w-full max-w-sm sm:max-w-md px-4 sm:px-16 py-5 bg-accent text-black font-black uppercase text-sm tracking-wide sm:tracking-widest whitespace-nowrap border-2 border-black shadow-[6px_6px_0px_0px_#1B1B1B] hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-none transition-all"
         >
-          Schedule a Free Estimate
-          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="#D58C46" stroke="none" aria-hidden="true"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+          Get My Free Estimate
+          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="#1B1B1B" stroke="none" aria-hidden="true"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
         </a>
 
         <a
@@ -87,7 +87,7 @@ const PHONE_NUMBER = "480-536-9456";
         </a>
 
         <!-- Google Review Badge -->
-        <div class="inline-flex items-center gap-3 mt-14 sm:mt-16 border border-black/10 px-5 py-3 bg-white">
+        <div class="inline-flex items-center gap-3 mt-8 sm:mt-16 border border-black/10 px-5 py-3 bg-white">
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" class="w-5 h-5 shrink-0" aria-hidden="true">
             <path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"/>
             <path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"/>
