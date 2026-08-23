@@ -107,6 +107,6 @@ section — that's why this cap exists. Do not exceed `text-6xl` outside headlin
 
 ## Phone / identity
 
-- Phone everywhere: SDG's real line, 602-905-5281 (`tel:+16029055281`).
+- Phone everywhere: SDG's real line, 480-536-9456 (`tel:+14805369456`).
 - Brand name is "SDG Electric" everywhere. Zero "Dean & Co" references may exist in `src/`.
   Check with: `grep -ri "dean" src/`
