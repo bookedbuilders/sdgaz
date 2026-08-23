@@ -1,0 +1,77 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="780" height="1040" viewBox="0 0 780 1040" font-family="ui-sans-serif, -apple-system, 'Helvetica Neue', Arial, sans-serif">
+  <!-- Custom SDG service-area map. Hand-drawn: geography is approximate,
+       styled to the design system (black / white / #D58C46 / #E5E5E5).
+       Chips are positioned at each area's real location; accent chips +
+       tinted corridor mark the Scottsdale-side focus zone. -->
+
+  <!-- ground -->
+  <rect width="780" height="1040" fill="#FFFFFF"/>
+
+  <!-- desert / preserve hints (very light) -->
+  <path d="M 320,0 Q 500,60 660,30 L 780,0 L 780,300 Q 640,330 540,280 Q 420,230 340,240 Q 260,250 200,190 L 150,0 Z" fill="#E5E5E5" opacity="0.28"/>
+  <ellipse cx="452" cy="760" rx="70" ry="40" fill="#E5E5E5" opacity="0.5"/>
+  <ellipse cx="120" cy="330" rx="90" ry="120" fill="#E5E5E5" opacity="0.25"/>
+
+  <!-- preserve triangles (nod to the terrain) -->
+  <g fill="#1B1B1B" opacity="0.18">
+    <path d="M 470,120 l 9,16 h -18 Z"/><path d="M 515,145 l 9,16 h -18 Z"/><path d="M 445,165 l 9,16 h -18 Z"/><path d="M 560,105 l 9,16 h -18 Z"/>
+    <path d="M 440,765 l 9,16 h -18 Z"/><path d="M 470,742 l 9,16 h -18 Z"/><path d="M 425,700 l 9,16 h -18 Z"/>
+    <path d="M 545,852 l 9,16 h -18 Z"/>
+  </g>
+
+  <!-- freeways (orientation only) -->
+  <g stroke="#1B1B1B" stroke-opacity="0.15" stroke-width="5" fill="none" stroke-linecap="round">
+    <path d="M 250,55 C 265,300 300,520 296,720 C 294,860 290,950 292,1015"/>
+    <path d="M 35,585 C 200,570 480,552 630,556 C 658,558 662,580 662,610 L 660,995"/>
+    <path d="M 350,950 C 356,830 420,690 438,560"/>
+    <path d="M 30,970 C 150,962 260,955 330,952 C 420,948 500,985 520,1010"/>
+  </g>
+
+  <!-- route shields -->
+  <g font-size="15" font-weight="800" text-anchor="middle">
+    <rect x="255" y="308" width="42" height="26" rx="4" fill="#FFFFFF" stroke="#1B1B1B" stroke-opacity="0.35" stroke-width="2"/>
+    <text x="276" y="327" fill="#1B1B1B" opacity="0.55">17</text>
+    <rect x="130" y="562" width="48" height="26" rx="4" fill="#FFFFFF" stroke="#1B1B1B" stroke-opacity="0.35" stroke-width="2"/>
+    <text x="154" y="581" fill="#1B1B1B" opacity="0.55">101</text>
+    <rect x="380" y="770" width="42" height="26" rx="4" fill="#FFFFFF" stroke="#1B1B1B" stroke-opacity="0.35" stroke-width="2"/>
+    <text x="401" y="789" fill="#1B1B1B" opacity="0.55">51</text>
+  </g>
+
+  <!-- focus corridor: North Scottsdale -> Paradise Valley -> Arcadia / Biltmore -->
+  <path d="M 560,462 Q 700,470 722,520 L 706,900 Q 700,950 600,962 Q 500,972 452,900 L 448,760 Q 470,620 520,540 Z" fill="#D58C46" opacity="0.13"/>
+
+  <!-- service zone boundary -->
+  <path d="M 150,145 Q 200,95 330,100 L 700,215 Q 745,340 738,525 L 702,930 Q 660,995 560,1002 L 300,1012 Q 230,940 210,800 L 178,450 Z"
+        fill="#D58C46" fill-opacity="0.05" stroke="#D58C46" stroke-width="3" stroke-dasharray="12 9"/>
+
+  <!-- badge -->
+  <rect x="452" y="52" width="292" height="44" fill="#1B1B1B"/>
+  <text x="598" y="80" fill="#FFFFFF" font-size="16" font-weight="800" font-style="italic" letter-spacing="3" text-anchor="middle">ACTIVE SERVICE ZONE</text>
+
+  <!-- reference cities (outside zone, greyed) -->
+  <g font-size="17" font-weight="600" fill="#1B1B1B" opacity="0.3" font-style="italic">
+    <text x="70" y="765">Peoria</text>
+    <text x="140" y="838">Glendale</text>
+    <text x="612" y="938">Scottsdale</text>
+  </g>
+
+  <!-- area chips — standard (black) -->
+  <g font-size="19" font-weight="800" font-style="italic" letter-spacing="1.5" text-anchor="middle">
+    <g><rect x="152" y="160" width="122" height="36" fill="#1B1B1B"/><text x="213" y="185" fill="#FFFFFF">ANTHEM</text></g>
+    <g><rect x="456" y="218" width="160" height="36" fill="#1B1B1B"/><text x="536" y="243" fill="#FFFFFF">CAVE CREEK</text></g>
+    <g><rect x="576" y="286" width="140" height="36" fill="#1B1B1B"/><text x="646" y="311" fill="#FFFFFF">CAREFREE</text></g>
+    <g><rect x="222" y="462" width="140" height="36" fill="#1B1B1B"/><text x="292" y="487" fill="#FFFFFF">NORTERRA</text></g>
+    <g><rect x="228" y="582" width="164" height="36" fill="#1B1B1B"/><text x="310" y="607" fill="#FFFFFF">DEER VALLEY</text></g>
+    <g><rect x="404" y="546" width="172" height="36" fill="#1B1B1B"/><text x="490" y="571" fill="#FFFFFF">DESERT RIDGE</text></g>
+    <g><rect x="272" y="722" width="170" height="36" fill="#1B1B1B"/><text x="357" y="747" fill="#FFFFFF">MOON VALLEY</text></g>
+    <g><rect x="200" y="936" width="216" height="36" fill="#1B1B1B"/><text x="308" y="961" fill="#FFFFFF">CENTRAL PHOENIX</text></g>
+  </g>
+
+  <!-- area chips — focus corridor (accent) -->
+  <g font-size="19" font-weight="800" font-style="italic" letter-spacing="1.5" text-anchor="middle">
+    <g><rect x="516" y="492" width="228" height="36" fill="#D58C46"/><text x="630" y="517" fill="#FFFFFF">NORTH SCOTTSDALE</text></g>
+    <g><rect x="464" y="802" width="220" height="36" fill="#D58C46"/><text x="574" y="827" fill="#FFFFFF">PARADISE VALLEY</text></g>
+    <g><rect x="356" y="852" width="140" height="36" fill="#D58C46"/><text x="426" y="877" fill="#FFFFFF">BILTMORE</text></g>
+    <g><rect x="474" y="892" width="130" height="36" fill="#D58C46"/><text x="539" y="917" fill="#FFFFFF">ARCADIA</text></g>
+  </g>
+</svg>
