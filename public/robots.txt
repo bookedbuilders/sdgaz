@@ -1,0 +1,6 @@
+User-agent: *
+Allow: /
+Disallow: /book
+Disallow: /thank-you
+
+Sitemap: https://book.sdgaz.com/sitemap.xml

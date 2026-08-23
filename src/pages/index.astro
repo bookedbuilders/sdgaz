@@ -24,9 +24,47 @@ const services = [
   { title: "Outdoor Lighting",        img: "/assets/ladder-service.jpg",    iconPath: `<path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 11 14 15 10"/>` },
   { title: "Smoke Detectors",         img: "/assets/panel-electrician.jpg", iconPath: `<path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/>` },
 ];
+
+// LocalBusiness entity for the map pack / knowledge graph. Facts mirror the
+// visible page (footer NAP, 24/7 claim, service-area grid) — keep in sync.
+const schema = {
+  "@context": "https://schema.org",
+  "@type": "Electrician",
+  "name": "SDG Electric",
+  "url": "https://book.sdgaz.com/",
+  "telephone": "+1-480-536-9456",
+  "image": "https://book.sdgaz.com/assets/team.webp",
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "35410 N 32nd Dr",
+    "addressLocality": "Phoenix",
+    "addressRegion": "AZ",
+    "addressCountry": "US",
+  },
+  "openingHoursSpecification": {
+    "@type": "OpeningHoursSpecification",
+    "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
+    "opens": "00:00",
+    "closes": "23:59",
+  },
+  "areaServed": [
+    "Anthem", "Cave Creek", "Carefree", "North Scottsdale", "Paradise Valley",
+    "Desert Ridge", "Norterra", "Deer Valley", "Moon Valley", "Biltmore",
+    "Arcadia", "Central Phoenix",
+  ].map((name) => ({ "@type": "Place", "name": `${name}, AZ` })),
+  "hasOfferCatalog": {
+    "@type": "OfferCatalog",
+    "name": "Residential Electrical Services",
+    "itemListElement": services.map((s) => ({
+      "@type": "Offer",
+      "itemOffered": { "@type": "Service", "name": s.title },
+    })),
+  },
+};
 ---
 
 <Base>
+  <script type="application/ld+json" is:inline set:html={JSON.stringify(schema)} />
   <div class="min-h-screen bg-white font-sans text-black overflow-x-hidden w-full relative">
     <Hero />
     <TrustBar />
