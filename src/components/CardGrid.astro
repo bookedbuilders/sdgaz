@@ -83,7 +83,7 @@ const gridCols =
       ))}
 
       {variant === 'light' && cards.map((card) => (
-        <div class="border-2 border-black p-8 shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] hover:shadow-none hover:translate-x-2 hover:translate-y-2 transition-all bg-white">
+        <div class="border-2 border-black p-8 shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] hover:shadow-none hover:translate-x-2 hover:translate-y-2 transition-all bg-white">
           {card.icon && <div class="text-4xl mb-4">{card.icon}</div>}
           <h3 class="font-black text-xl uppercase italic tracking-tighter leading-tight mb-3">{card.title}</h3>
           {card.desc && <p class="text-black/60 font-medium leading-relaxed">{card.desc}</p>}
