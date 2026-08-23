@@ -2,6 +2,7 @@
 import Base from '../layouts/Base.astro';
 import Hero from '../components/Hero.astro';
 import TrustBar from '../components/TrustBar.astro';
+import Fleet from '../components/Fleet.astro';
 import CardGrid from '../components/CardGrid.astro';
 import NeedPower from '../components/NeedPower.astro';
 import Reviews from '../components/Reviews.astro';
@@ -69,6 +70,7 @@ const schema = {
   <div class="min-h-screen bg-white font-sans text-black overflow-x-hidden w-full relative">
     <Hero />
     <TrustBar />
+    <Fleet />
     <CardGrid
       cards={services}
       variant="services"
