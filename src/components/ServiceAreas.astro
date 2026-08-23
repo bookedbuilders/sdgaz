@@ -35,11 +35,11 @@ const areas = [
           <p class="text-black/60 font-medium">We cover the Valley from Surprise to Scottsdale — North Phoenix, Paradise Valley, the West Valley, and Central Phoenix. If you're in the metro, odds are we've got you covered.</p>
         </div>
 
-        <div class="grid grid-cols-2 gap-x-12 gap-y-6">
+        <div class="grid grid-cols-1 min-[360px]:grid-cols-2 gap-x-6 sm:gap-x-12 gap-y-3 min-[360px]:gap-y-4 sm:gap-y-6">
           {areas.map((area) => (
-            <div class="flex items-center gap-3 group">
-              <div class="w-2 h-2 bg-accent rotate-45 group-hover:scale-150 transition-transform"></div>
-              <span class="font-black italic uppercase text-lg sm:text-xl tracking-tighter">{area}</span>
+            <div class="flex items-center gap-2 sm:gap-3 group">
+              <div class="w-2 h-2 shrink-0 bg-accent rotate-45 group-hover:scale-150 transition-transform"></div>
+              <span class="font-black italic uppercase text-[13px] sm:text-xl tracking-tighter whitespace-nowrap">{area}</span>
             </div>
           ))}
         </div>
