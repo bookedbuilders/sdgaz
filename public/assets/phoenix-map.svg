@@ -1,14 +1,14 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="780" height="1040" viewBox="0 0 780 1040" font-family="ui-sans-serif, -apple-system, 'Helvetica Neue', Arial, sans-serif">
+<svg xmlns="http://www.w3.org/2000/svg" width="840" height="1040" viewBox="0 0 840 1040" font-family="ui-sans-serif, -apple-system, 'Helvetica Neue', Arial, sans-serif">
   <!-- Custom SDG service-area map. Hand-drawn: geography is approximate,
        styled to the design system (black / white / #D58C46 / #E5E5E5).
        Chips are positioned at each area's real location; accent chips +
        tinted corridor mark the Scottsdale-side focus zone. -->
 
   <!-- ground -->
-  <rect width="780" height="1040" fill="#FFFFFF"/>
+  <rect width="840" height="1040" fill="#FFFFFF"/>
 
   <!-- desert / preserve hints (very light) -->
-  <path d="M 320,0 Q 500,60 660,30 L 780,0 L 780,300 Q 640,330 540,280 Q 420,230 340,240 Q 260,250 200,190 L 150,0 Z" fill="#E5E5E5" opacity="0.28"/>
+  <path d="M 320,0 Q 500,60 660,30 L 840,0 L 840,300 Q 640,330 540,280 Q 420,230 340,240 Q 260,250 200,190 L 150,0 Z" fill="#E5E5E5" opacity="0.28"/>
   <ellipse cx="452" cy="760" rx="70" ry="40" fill="#E5E5E5" opacity="0.5"/>
   <ellipse cx="120" cy="330" rx="90" ry="120" fill="#E5E5E5" opacity="0.25"/>
 
@@ -38,15 +38,15 @@
   </g>
 
   <!-- focus corridor: North Scottsdale -> Paradise Valley -> Arcadia / Biltmore -->
-  <path d="M 560,462 Q 700,470 722,520 L 706,900 Q 700,950 600,962 Q 500,972 452,900 L 448,760 Q 470,620 520,540 Z" fill="#D58C46" opacity="0.13"/>
+  <path d="M 556,458 Q 650,380 740,356 Q 806,344 812,420 L 790,900 Q 782,950 620,962 Q 500,972 452,900 L 448,760 Q 470,620 520,540 Z" fill="#D58C46" opacity="0.13"/>
 
   <!-- service zone boundary -->
-  <path d="M 150,145 Q 200,95 330,100 L 700,215 Q 745,340 738,525 L 702,930 Q 660,995 560,1002 L 300,1012 Q 230,940 210,800 L 178,450 Z"
+  <path d="M 150,145 Q 200,95 330,100 L 690,205 Q 800,255 818,400 L 794,930 Q 750,995 560,1004 L 300,1012 Q 230,940 210,800 L 178,450 Z"
         fill="#D58C46" fill-opacity="0.05" stroke="#D58C46" stroke-width="3" stroke-dasharray="12 9"/>
 
   <!-- badge -->
-  <rect x="452" y="52" width="292" height="44" fill="#1B1B1B"/>
-  <text x="598" y="80" fill="#FFFFFF" font-size="16" font-weight="800" font-style="italic" letter-spacing="3" text-anchor="middle">ACTIVE SERVICE ZONE</text>
+  <rect x="512" y="52" width="292" height="44" fill="#1B1B1B"/>
+  <text x="658" y="80" fill="#FFFFFF" font-size="16" font-weight="800" font-style="italic" letter-spacing="3" text-anchor="middle">ACTIVE SERVICE ZONE</text>
 
   <!-- reference cities (outside zone, greyed) -->
   <g font-size="17" font-weight="600" fill="#1B1B1B" opacity="0.3" font-style="italic">
@@ -73,5 +73,7 @@
     <g><rect x="464" y="802" width="220" height="36" fill="#D58C46"/><text x="574" y="827" fill="#FFFFFF">PARADISE VALLEY</text></g>
     <g><rect x="356" y="852" width="140" height="36" fill="#D58C46"/><text x="426" y="877" fill="#FFFFFF">BILTMORE</text></g>
     <g><rect x="474" y="892" width="130" height="36" fill="#D58C46"/><text x="539" y="917" fill="#FFFFFF">ARCADIA</text></g>
+    <g><rect x="688" y="368" width="110" height="36" fill="#D58C46"/><text x="743" y="393" fill="#FFFFFF">TROON</text></g>
+    <g><rect x="560" y="742" width="216" height="36" fill="#D58C46"/><text x="668" y="767" fill="#FFFFFF">MCCORMICK RANCH</text></g>
   </g>
 </svg>
