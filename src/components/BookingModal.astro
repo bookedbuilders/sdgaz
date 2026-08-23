@@ -86,6 +86,8 @@ import { SURVEY_URL } from '../config';
     }
   }
 
+  /* Bare X — no box. The 44px hit area stays for fat-finger/a11y;
+     only the glyph is visible. */
   #booking-close {
     position: absolute;
     top: 0;
@@ -95,12 +97,12 @@ import { SURVEY_URL } from '../config';
     height: 44px;
     display: grid;
     place-items: center;
-    background: #1B1B1B;
-    color: #fff;
+    background: transparent;
+    color: #1B1B1B;
     cursor: pointer;
     border: none;
   }
-  #booking-close:hover { background: #D58C46; }
+  #booking-close:hover { color: #D58C46; }
 
   #booking-frame {
     border: none;
