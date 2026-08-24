@@ -33,7 +33,12 @@
   ],
   "redirects": [
     {
-      "source": "/:path*",
+      "source": "/",
+      "destination": "https://sdgaz.com",
+      "permanent": false
+    },
+    {
+      "source": "/:path+",
       "destination": "https://sdgaz.com",
       "permanent": false
     }
