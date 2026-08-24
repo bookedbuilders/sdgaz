@@ -31,38 +31,37 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
       gtag('js', new Date());
 
       gtag('config', 'AW-18374148612');
-
-      /* ============================================================
-         GOOGLE CALL FORWARDING (website call conversions) — DORMANT
-         ============================================================
-         Swaps the displayed phone number with a Google forwarding
-         number for ad-click visitors, so calls from the site count
-         as conversions (label Jh5pCLuD8uYcEISEvblE).
-
-         TO ACTIVATE (when Joe says "turn on the Google forwarding
-         thing"), uncomment the block below. Two things to check:
-
-         1. NUMBER FORMAT MUST MATCH THE PAGE. This site renders the
-            phone as "480-536-9456" (dashes, no parens — see
-            PHONE_NUMBER consts). Google only replaces numbers whose
-            text matches phone_conversion_number. Google Ads generated
-            the snippet as "(480) 536-9456" — if replacement doesn't
-            fire on test, change the value below to '480-536-9456'.
-
-         2. DOUBLE-COUNT RISK. The click-to-call conversion above
-            (crk9CK6J1-UcEISEvblE) fires on tel: taps; call forwarding
-            counts the same calls. After activating, set ONE of the
-            two call actions to "Secondary" in Google Ads goals so
-            phone calls aren't counted twice.
-
-      <script>
-        gtag('config', 'AW-18374148612/Jh5pCLuD8uYcEISEvblE', {
-          'phone_conversion_number': '(480) 536-9456'
-        });
-      </script>
-
-         (block is inert while inside this comment) */
     </script>
+    <!-- ============================================================
+      GOOGLE CALL FORWARDING (website call conversions) - DORMANT
+      ============================================================
+      Swaps the displayed phone number with a Google forwarding number
+      for ad-click visitors so calls count as conversions
+      (label Jh5pCLuD8uYcEISEvblE).
+
+      TO ACTIVATE when Joe says "turn on the Google forwarding thing":
+      replace this whole HTML comment with a real script tag:
+
+        [script]
+          gtag('config', 'AW-18374148612/Jh5pCLuD8uYcEISEvblE', {
+            'phone_conversion_number': '(480) 536-9456'
+          });
+        [/script]
+
+      ([script] = angle-bracket script tags; written square here because
+      a literal closing script tag inside any comment breaks HTML parsing.
+      It must be a separate script AFTER the base gtag config above.)
+
+      CHECK 1 - NUMBER FORMAT: this site renders the phone as
+      "480-536-9456" (dashes). Google only swaps numbers whose displayed
+      text matches phone_conversion_number. If replacement does not fire
+      in testing, change the value to '480-536-9456'.
+
+      CHECK 2 - DOUBLE COUNTING: the click-to-call conversion above
+      (crk9CK6J1-UcEISEvblE) tracks tel: taps; forwarding counts the
+      same calls. After activating, set one of the two call actions to
+      "Secondary" in Google Ads goals.
+    ============================================================= -->
 
     <!-- Event snippet: "Click to call" conversion (AW-18374148612/crk9CK6J1-UcEISEvblE).
          Google's snippet, with two guards added: bail straight to the call if
