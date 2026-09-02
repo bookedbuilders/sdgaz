@@ -45,6 +45,7 @@ const emergencyFaqs = [
     <CardGrid
       cards={warningSigns}
       variant="dark"
+      padTop={false}
       eyebrow="Don't Wait On These"
       headline={`CALL THE MOMENT <br />YOU NOTICE.`}
       subheadline="Electrical fires don't announce themselves. These six warning signs are the ones our emergency crews see right before something serious — treat every one as call-now."
@@ -52,7 +53,7 @@ const emergencyFaqs = [
       sectionLabel="Electrical emergency warning signs"
     />
     <NeedPower />
-    <Reviews />
+    <Reviews padBottom={true} />
     <FAQ faqs={emergencyFaqs} eyebrow="Emergency Answers" />
     <Footer />
     <MobileStickyCTA />

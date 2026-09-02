@@ -51,6 +51,7 @@ const sameDayFaqs = [
       sectionLabel="Same-day electrical repairs"
     />
     <Reviews
+      padBottom={true}
       stats={[
         { val: "90%",  label: "Jobs Done Same Day" },
         { val: "1",    label: "Visit For Most Repairs" },
@@ -58,7 +59,7 @@ const sameDayFaqs = [
         { val: "24/7", label: "Around The Clock Availability" },
       ]}
     />
-    <NeedPower />
+    <NeedPower padBottom={false} />
     <FAQ faqs={sameDayFaqs} eyebrow="Same-Day Answers" />
     <Footer />
     <MobileStickyCTA />

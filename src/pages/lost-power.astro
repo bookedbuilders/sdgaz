@@ -41,13 +41,14 @@ const lostPowerFaqs = [
     <CardGrid
       cards={scenarios}
       variant="dark"
+      padTop={false}
       eyebrow="30-Second Diagnosis"
       headline={`WHAT KIND OF <br />OUT ARE YOU?`}
       subheadline="Three ways homes lose power, and what each one means. Whichever yours is, the phone call is free and the answer is straight."
       sectionId="scenarios"
       sectionLabel="Power loss scenarios"
     />
-    <NeedPower />
+    <NeedPower padBottom={false} />
     <FAQ faqs={lostPowerFaqs} eyebrow="Power Loss Answers" />
     <Footer />
     <MobileStickyCTA />

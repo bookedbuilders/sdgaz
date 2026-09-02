@@ -6,9 +6,14 @@ const jobs = [
   { img: "/assets/job4.png",             label: "SAME-DAY SERVICE" },
   { img: "/assets/ev-charger.jpg",        label: "HOME INSTALLS" },
 ];
+
+interface Props {
+  padBottom?: boolean;  // set when a dark section follows (index has a white section after)
+}
+const { padBottom = false } = Astro.props;
 ---
 
-<section class="bg-white pt-24 md:pt-32 text-black border-t border-black/5" aria-label="Recent job photos">
+<section class={`bg-white pt-24 md:pt-32 ${padBottom ? 'pb-24 md:pb-32' : ''} text-black border-t border-black/5`} aria-label="Recent job photos">
   <div class="max-w-7xl mx-auto px-6 md:px-12">
 
     <div class="text-center mb-20">

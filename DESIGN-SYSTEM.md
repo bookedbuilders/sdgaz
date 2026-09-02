@@ -107,6 +107,10 @@ section — that's why this cap exists. Do not exceed `text-6xl` outside headlin
 
 ## Phone / identity
 
-- Phone everywhere: SDG's real line, 480-536-9456 (`tel:+14805369456`).
+- Phone everywhere in the code: 602-905-5281 (`tel:+16029055281`) — the Google PPC
+  tracking number, deliberately swapped in across the whole site in commit 1c52597
+  (2026-08-31). Do NOT "correct" it back to 480.
+- 480-536-9456 (`tel:+14805369456`) is SDG's real, A2P-registered line. It stays out
+  of the site code while the PPC tracking number is in use.
 - Brand name is "SDG Electric" everywhere. Zero "Dean & Co" references may exist in `src/`.
   Check with: `grep -ri "dean" src/`

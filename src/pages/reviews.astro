@@ -26,10 +26,12 @@ import BookingModal from '../components/BookingModal.astro';
     />
     <TrustBar />
     <Reviews
+      padTop={false}
+      padBottom={true}
       eyebrow="In Their Words"
       headline={'THE REVIEWS <br />SAY IT <br /><span class="text-accent">BETTER.</span>'}
     />
-    <Gallery />
+    <Gallery padBottom={true} />
     <Authority />
     <NeedPower />
     <Footer />
