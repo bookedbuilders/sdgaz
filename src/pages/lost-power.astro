@@ -1,0 +1,56 @@
+---
+import Base from '../layouts/Base.astro';
+import Hero from '../components/Hero.astro';
+import TrustBar from '../components/TrustBar.astro';
+import CardGrid from '../components/CardGrid.astro';
+import NeedPower from '../components/NeedPower.astro';
+import FAQ from '../components/FAQ.astro';
+import Footer from '../components/Footer.astro';
+import MobileStickyCTA from '../components/MobileStickyCTA.astro';
+import BookingModal from '../components/BookingModal.astro';
+
+const scenarios = [
+  { icon: "🏠", title: "WHOLE HOUSE IS DARK", desc: "Look at your neighbors first. If the street is dark too, it's APS or SRP. If it's just your house, your main breaker or service connection failed — that's us, and we dispatch immediately." },
+  { icon: "🌗", title: "HALF THE HOUSE IS OUT", desc: "Some rooms dead, lights dim or surging in others? You've likely lost one leg of your service. This can cook appliances — shut the main off and call us now." },
+  { icon: "🔌", title: "ONE ROOM OR OUTLET", desc: "Usually a tripped breaker or a GFCI hiding upstream. If it trips again after a reset, something is faulting — we find the cause instead of resetting the symptom." },
+];
+
+const lostPowerFaqs = [
+  { q: "Is it my utility or my wiring?", a: "Fastest check: your neighbors. Whole street dark means APS/SRP — report the outage to them. Just your house, or only part of it, means the problem is on your side of the meter, and that's exactly what we fix, around the clock." },
+  { q: "Half my house has power — is that dangerous?", a: "It can be. Losing one leg of your 240V service means some circuits see wrong voltage, which can damage AC units, refrigerators, and electronics. Turn the main breaker off and call — this one shouldn't wait for morning." },
+  { q: "The breaker keeps tripping after I reset it. Now what?", a: "Stop resetting it. A breaker that re-trips is doing its job — there's a real fault on that circuit. Leave it off and call us; forcing it repeatedly is how wiring gets hot." },
+  { q: "How fast can you get my power back on?", a: "We dispatch immediately for power-loss calls, day or night, from inside the Valley. Most single-circuit faults are diagnosed and repaired the same visit — our vans carry the common breakers and parts." },
+];
+---
+
+<Base
+  title="Lost Power In Your Home? Immediate Dispatch in Phoenix | SDG Electric"
+  description="Power out in your Phoenix home but the neighbors have lights? That's your electrical system. SDG Electric dispatches licensed electricians 24/7. Call 602-905-5281."
+>
+  <div class="min-h-screen bg-white font-sans text-black overflow-x-hidden w-full relative">
+    <Hero
+      callFirst={true}
+      eyebrow="Lost Power Response"
+      headline={'In the dark? <span class="text-accent">Not for long.</span>'}
+      headlineSizeClass="text-[44px] sm:text-[80px] md:text-[104px] lg:text-[120px]"
+      subheadline="Whole house or one room — we find the fault fast and get your power back on. Immediate dispatch, day or night, from inside the Valley."
+      badges={["Immediate Dispatch", "24/7 Response", "Licensed & Insured"]}
+      bannerText="Lost Power? Immediate Dispatch — Phoenix — 24/7"
+    />
+    <TrustBar />
+    <CardGrid
+      cards={scenarios}
+      variant="dark"
+      eyebrow="30-Second Diagnosis"
+      headline={`WHAT KIND OF <br />OUT ARE YOU?`}
+      subheadline="Three ways homes lose power, and what each one means. Whichever yours is, the phone call is free and the answer is straight."
+      sectionId="scenarios"
+      sectionLabel="Power loss scenarios"
+    />
+    <NeedPower />
+    <FAQ faqs={lostPowerFaqs} eyebrow="Power Loss Answers" />
+    <Footer />
+    <MobileStickyCTA />
+    <BookingModal />
+  </div>
+</Base>

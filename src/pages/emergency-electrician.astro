@@ -1,0 +1,61 @@
+---
+import Base from '../layouts/Base.astro';
+import Hero from '../components/Hero.astro';
+import TrustBar from '../components/TrustBar.astro';
+import CardGrid from '../components/CardGrid.astro';
+import Reviews from '../components/Reviews.astro';
+import NeedPower from '../components/NeedPower.astro';
+import FAQ from '../components/FAQ.astro';
+import Footer from '../components/Footer.astro';
+import MobileStickyCTA from '../components/MobileStickyCTA.astro';
+import BookingModal from '../components/BookingModal.astro';
+
+const warningSigns = [
+  { icon: "⚡", title: "SPARKING OUTLETS",   desc: "Any visible spark, scorch mark, or crackle from an outlet is live arcing. Stop using it and call — arcing is a leading cause of house fires." },
+  { icon: "🔥", title: "BURNING SMELL",      desc: "A fishy or burning-plastic smell with no obvious source is overheating wiring inside your walls. This one is a call-now, not a tomorrow." },
+  { icon: "🔌", title: "BUZZING PANEL",      desc: "Your breaker panel should be silent. Buzzing, humming, or a warm panel door means a failing breaker or loose lug under load." },
+  { icon: "🌡️", title: "HOT SWITCH PLATES", desc: "Switches and outlet covers should never be warm to the touch. Heat means resistance, and resistance becomes fire." },
+  { icon: "🏠", title: "MAIN BREAKER TRIPS", desc: "If your main keeps tripping, something downstream is pulling dangerous current. Resetting it over and over makes it worse." },
+  { icon: "⛈️", title: "STORM DAMAGE",       desc: "Monsoon take out a line, a mast, or your panel? We secure it, make it safe, and get you powered back up." },
+];
+
+const emergencyFaqs = [
+  { q: "Do you actually answer at 2 AM?", a: "Yes — a real person, not a voicemail. Our emergency line is staffed around the clock and crews dispatch from within the Valley, so response times are measured in minutes, not mornings." },
+  { q: "What counts as an electrical emergency?", a: "Sparks, smoke, burning smells, a hot panel, exposed live wiring, or losing power when your neighbors still have it. If you're asking yourself whether it's an emergency, call us and we'll tell you straight — no charge for the phone call." },
+  { q: "What should I do while I wait?", a: "If it's safe to reach, flip the affected breaker off — or the main if you're not sure which one. Don't touch anything that's sparking or smells hot. If you ever see flames or heavy smoke, get out and call 911 first." },
+  { q: "Will I get charged a mystery emergency fee?", a: "No. You'll know exactly what the work involves and what it costs before we touch a single wire — nights and weekends included. You approve everything up front." },
+];
+---
+
+<Base
+  title="24/7 Emergency Electrician in Phoenix | Immediate Dispatch | SDG Electric"
+  description="Sparking outlet? Burning smell? No power? SDG Electric dispatches licensed emergency electricians across Phoenix & Scottsdale 24/7. Call 602-905-5281 now."
+>
+  <div class="min-h-screen bg-white font-sans text-black overflow-x-hidden w-full relative">
+    <Hero
+      callFirst={true}
+      eyebrow="24/7 Emergency Dispatch"
+      headline={'Sparks? No power? <span class="text-accent">We answer.</span>'}
+      headlineSizeClass="text-[40px] sm:text-[72px] md:text-[96px] lg:text-[112px]"
+      subheadline="A real human picks up at 2 AM — and a licensed electrician is on the way. Crews dispatched from inside the Valley, around the clock."
+      badges={["Licensed & Insured", "Immediate Dispatch", "Upfront Pricing"]}
+      bannerText="24/7 Emergency Electricians — Phoenix — Immediate Dispatch"
+    />
+    <TrustBar />
+    <CardGrid
+      cards={warningSigns}
+      variant="dark"
+      eyebrow="Don't Wait On These"
+      headline={`CALL THE MOMENT <br />YOU NOTICE.`}
+      subheadline="Electrical fires don't announce themselves. These six warning signs are the ones our emergency crews see right before something serious — treat every one as call-now."
+      sectionId="warning-signs"
+      sectionLabel="Electrical emergency warning signs"
+    />
+    <NeedPower />
+    <Reviews />
+    <FAQ faqs={emergencyFaqs} eyebrow="Emergency Answers" />
+    <Footer />
+    <MobileStickyCTA />
+    <BookingModal />
+  </div>
+</Base>

@@ -14,7 +14,9 @@ const {
 } = Astro.props;
 
 // Canonical: strip query strings so gclid/UTM variants collapse to one URL.
-const canonicalURL = new URL(Astro.url.pathname, Astro.site);
+// Also strip the .html suffix from format:'file' builds — Vercel cleanUrls
+// serves /page, so that's the canonical form.
+const canonicalURL = new URL(Astro.url.pathname.replace(/\.html$/, ''), Astro.site);
 ---
 <!doctype html>
 <html lang="en">

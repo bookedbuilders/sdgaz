@@ -1,0 +1,67 @@
+---
+import Base from '../layouts/Base.astro';
+import Hero from '../components/Hero.astro';
+import TrustBar from '../components/TrustBar.astro';
+import CardGrid from '../components/CardGrid.astro';
+import Reviews from '../components/Reviews.astro';
+import NeedPower from '../components/NeedPower.astro';
+import FAQ from '../components/FAQ.astro';
+import Footer from '../components/Footer.astro';
+import MobileStickyCTA from '../components/MobileStickyCTA.astro';
+import BookingModal from '../components/BookingModal.astro';
+
+const repairs = [
+  { icon: "🔌", title: "DEAD OUTLETS & SWITCHES", desc: "One outlet quit, or half a room went quiet. We trace the fault to its source and fix the cause — not just the symptom." },
+  { icon: "⚡", title: "BREAKERS THAT TRIP",       desc: "A breaker that keeps tripping is telling you something. We find the overloaded circuit or failing breaker and end the resets." },
+  { icon: "💡", title: "FLICKERING LIGHTS",        desc: "Flicker when the AC kicks on? Loose neutral, failing connection, or an overloaded panel — all findable, all fixable today." },
+  { icon: "🌀", title: "CEILING FANS & FIXTURES",  desc: "Install, replace, or fix the wobble. In and out the same day with the mess cleaned up behind us." },
+  { icon: "🛡️", title: "GFCI & CODE FIXES",        desc: "Dead GFCIs, missing grounds, DIY wiring that needs undoing. We bring it up to code the first time." },
+  { icon: "🚨", title: "SMOKE DETECTORS",          desc: "Hardwired detectors chirping, dying, or a decade old? We replace and interconnect them properly — no ladder acrobatics for you." },
+];
+
+const sameDayFaqs = [
+  { q: "Is same-day service actually same-day?", a: "For about 90% of calls, yes. Call before noon and we're usually at your door before dinner. Our crews live and dispatch inside the Valley — nobody is driving in from Tucson." },
+  { q: "How fast can you actually get here?", a: "For emergencies, we dispatch immediately — day or night. For everything else, most jobs are scheduled same-day or next-day. We give you a real arrival window and show up inside it, not a vague 'sometime between 8 and 4.'" },
+  { q: "Do you charge just to come out?", a: "You'll never be surprised. We tell you exactly what the work involves before we touch a single wire, and you approve everything up front. No mystery fees, no pressure, no games." },
+  { q: "Can you fix it in one visit?", a: "Most repairs, yes — our vans are stocked for the common failures: breakers, outlets, switches, GFCIs, fixtures, and detector replacements. If a part has to be ordered, you'll know before we start, not after." },
+];
+---
+
+<Base
+  title="Same-Day Electrical Repairs in Phoenix | Fixed Before Dinner | SDG Electric"
+  description="Dead outlets, tripping breakers, flickering lights — call SDG Electric before noon and a licensed Phoenix electrician fixes it today. Upfront pricing."
+>
+  <div class="min-h-screen bg-white font-sans text-black overflow-x-hidden w-full relative">
+    <Hero
+      eyebrow="Same-Day Service"
+      headline={'Broken today. <span class="text-accent">Fixed today.</span>'}
+      headlineSizeClass="text-[44px] sm:text-[80px] md:text-[104px] lg:text-[120px]"
+      subheadline="Call before noon and a licensed electrician is at your door before dinner. Real arrival windows, upfront pricing, one visit for most repairs."
+      badges={["90% Same-Day", "Upfront Pricing", "Licensed & Insured"]}
+      bannerText="Same-Day Electrical Repairs — Phoenix Metro"
+    />
+    <TrustBar />
+    <CardGrid
+      cards={repairs}
+      variant="light"
+      eyebrow="Fixed In One Visit"
+      headline={`THE STUFF WE FIX <br />EVERY SINGLE DAY.`}
+      subheadline="Our vans are stocked for the common failures, so the repair happens on the first visit — not after a parts run and a second appointment."
+      sectionId="repairs"
+      sectionLabel="Same-day electrical repairs"
+    />
+    <Reviews
+      stats={[
+        { val: "90%",  label: "Jobs Done Same Day" },
+        { val: "1",    label: "Visit For Most Repairs" },
+        { val: "100%", label: "Upfront Pricing" },
+        { val: "24/7", label: "Around The Clock Availability" },
+      ]}
+    />
+    <NeedPower />
+    <FAQ faqs={sameDayFaqs} eyebrow="Same-Day Answers" />
+    <Footer />
+    <MobileStickyCTA />
+    <BookingModal />
+  </div>
+</Base>

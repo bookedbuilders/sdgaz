@@ -1,0 +1,39 @@
+---
+import Base from '../layouts/Base.astro';
+import Hero from '../components/Hero.astro';
+import TrustBar from '../components/TrustBar.astro';
+import Reviews from '../components/Reviews.astro';
+import Gallery from '../components/Gallery.astro';
+import Authority from '../components/Authority.astro';
+import NeedPower from '../components/NeedPower.astro';
+import Footer from '../components/Footer.astro';
+import MobileStickyCTA from '../components/MobileStickyCTA.astro';
+import BookingModal from '../components/BookingModal.astro';
+---
+
+<Base
+  title="SDG Electric Reviews | 180+ Five-Star Google Reviews | Phoenix Electrician"
+  description="See why Phoenix homeowners rate SDG Electric 5.0 on Google across 180+ reviews — same-day repairs, upfront pricing, and work that's done right the first time."
+>
+  <div class="min-h-screen bg-white font-sans text-black overflow-x-hidden w-full relative">
+    <Hero
+      eyebrow="Real Phoenix Customers"
+      headline={'180+ five-star <span class="text-accent">reviews.</span>'}
+      headlineSizeClass="text-[44px] sm:text-[80px] md:text-[104px] lg:text-[120px]"
+      subheadline="Anthem to Arcadia — this is what your neighbors say after we've been in their homes. Rated 5.0 on Google, and we intend to keep it that way."
+      badges={["5.0 On Google", "180+ Reviews", "Licensed & Insured"]}
+      bannerText="Rated 5.0 On Google — 180+ Phoenix Reviews"
+    />
+    <TrustBar />
+    <Reviews
+      eyebrow="In Their Words"
+      headline={'THE REVIEWS <br />SAY IT <br /><span class="text-accent">BETTER.</span>'}
+    />
+    <Gallery />
+    <Authority />
+    <NeedPower />
+    <Footer />
+    <MobileStickyCTA />
+    <BookingModal />
+  </div>
+</Base>

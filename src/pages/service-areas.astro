@@ -1,0 +1,41 @@
+---
+import Base from '../layouts/Base.astro';
+import Hero from '../components/Hero.astro';
+import TrustBar from '../components/TrustBar.astro';
+import ServiceAreas from '../components/ServiceAreas.astro';
+import NeedPower from '../components/NeedPower.astro';
+import FAQ from '../components/FAQ.astro';
+import Footer from '../components/Footer.astro';
+import MobileStickyCTA from '../components/MobileStickyCTA.astro';
+import BookingModal from '../components/BookingModal.astro';
+
+const areaFaqs = [
+  { q: "Is there an electrician near me right now?", a: "If you're in North Phoenix, North Scottsdale, Paradise Valley, or Central Phoenix — yes. Our crews are local and dispatched from within the Valley, not routed from a call center. Most neighborhoods get same-day service, and our emergency line is answered around the clock." },
+  { q: "Do you serve my neighborhood?", a: "We cover Anthem, Cave Creek, Carefree, North Scottsdale — including Troon and McCormick Ranch — Paradise Valley, Desert Ridge, Norterra, Deer Valley, Moon Valley, Biltmore, Arcadia, and Central Phoenix, plus the West Valley: North Peoria, Glendale, and Surprise. If you're anywhere in the Phoenix metro, call us — odds are we've got you covered." },
+  { q: "Does distance change the price?", a: "No. Same upfront pricing whether you're in Anthem or Arcadia. We quote the work, not the drive — and you approve everything before we start." },
+  { q: "I'm just outside your map — can you still come?", a: "Usually, yes. The map shows where our crews are densest, not a hard border. If you're in the metro, call and we'll give you a straight answer and a real arrival window." },
+];
+---
+
+<Base
+  title="Phoenix Electrician Service Areas | Surprise to Scottsdale | SDG Electric"
+  description="SDG Electric serves 17 Valley communities — Anthem, Cave Creek, North Scottsdale, Paradise Valley, Glendale, Surprise & more. Local crews, same-day service."
+>
+  <div class="min-h-screen bg-white font-sans text-black overflow-x-hidden w-full relative">
+    <Hero
+      eyebrow="Local Crews, Local Blocks"
+      headline={'Surprise to <span class="text-accent">Scottsdale.</span>'}
+      headlineSizeClass="text-[44px] sm:text-[80px] md:text-[104px] lg:text-[120px]"
+      subheadline="17 Valley communities, one local dispatch. If you're in the Phoenix metro, an SDG van is closer than you think."
+      badges={["17 Communities", "Local Dispatch", "Same-Day Service"]}
+      bannerText="Serving 17 Phoenix-Area Communities — Same-Day"
+    />
+    <TrustBar />
+    <ServiceAreas />
+    <FAQ faqs={areaFaqs} eyebrow="Coverage Answers" />
+    <NeedPower />
+    <Footer />
+    <MobileStickyCTA />
+    <BookingModal />
+  </div>
+</Base>
