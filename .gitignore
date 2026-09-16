@@ -7,3 +7,6 @@ coverage/
 .env*
 !.env.example
 .astro/
+.vercel/
+# local analytics DB written by scripts/dev-api.ts
+.data/

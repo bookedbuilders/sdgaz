@@ -12,5 +12,10 @@ export default defineConfig({
   },
   vite: {
     plugins: [tailwindcss()],
+    server: {
+      // /api/* is a Vercel function (api/track.ts) in production. In dev,
+      // `node scripts/dev-api.ts` serves it on :3999 and this forwards to it.
+      proxy: { '/api': 'http://localhost:3999' },
+    },
   },
 });

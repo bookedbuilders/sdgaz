@@ -141,6 +141,133 @@ const canonicalURL = new URL(Astro.url.pathname.replace(/\.html$/, ''), Astro.si
         };
       })();
     </script>
+    <!-- First-party analytics (~2KB, no cookies, no third-party domain).
+         Batches events and ships them to /api/track (api/track.ts, same origin)
+         via sendBeacon so nothing ever blocks a tap or navigation. Boots on
+         DOMContentLoaded (trivial work, no LCP cost). Reads window.__sdgParams (set above) for
+         UTM/gclid attribution. Event names follow GA4: page_view, scroll,
+         section_view (dwell ms), click / book_click / call_click,
+         booking_complete (thank-you view), user_engagement (visible ms).
+         Viewed in the Sidehouse dashboard at /landing. -->
+    <script is:inline>
+      (function () {
+        if (navigator.webdriver) return;
+        var EP = '/api/track', q = [], t0 = Date.now(), tLast = t0, maxScroll = 0;
+        var rnd = function () { return Math.random().toString(36).slice(2, 10) + Date.now().toString(36); };
+        var sid, vid;
+        try {
+          sid = sessionStorage.getItem('sdg_sid'); if (!sid) { sid = rnd(); sessionStorage.setItem('sdg_sid', sid); }
+          vid = localStorage.getItem('sdg_vid');   if (!vid) { vid = rnd(); localStorage.setItem('sdg_vid', vid); }
+        } catch (e) { sid = sid || rnd(); vid = vid || ''; }
+
+        // Internal traffic (GA4 "internal traffic" filter). ?internal=1 marks this
+        // browser for good, ?internal=0 clears it; localhost is always internal.
+        // The dashboard hides internal=1 unless it's in Test mode.
+        var internal = location.hostname === 'localhost' ? 1 : 0;
+        try {
+          var im = location.search.match(/[?&]internal=([01])/);
+          if (im) localStorage.setItem('sdg_internal', im[1]);
+          if (localStorage.getItem('sdg_internal') === '1') internal = 1;
+        } catch (e) {}
+
+        var p = new URLSearchParams(window.__sdgParams || ''), gclid = !!p.get('gclid');
+        var base = {
+          sid: sid, vid: vid, path: location.pathname, internal: internal,
+          src: p.get('utm_source') || (gclid ? 'google' : ''),
+          med: p.get('utm_medium') || (gclid ? 'cpc' : ''),
+          camp: p.get('utm_campaign') || '', gclid: gclid ? 1 : 0,
+          dev: innerWidth < 768 ? 'mobile' : innerWidth < 1024 ? 'tablet' : 'desktop',
+          frame: window.top !== window.self ? 1 : 0
+        };
+
+        function ev(t, o) {
+          var e = { t: t, ts: new Date().toISOString(), ms: Date.now() - t0 };
+          for (var k in o) e[k] = o[k];
+          q.push(e); if (q.length >= 20) flush();
+        }
+        function flush() {
+          if (!q.length) return;
+          var body = JSON.stringify(Object.assign({ ev: q }, base)); q = [];
+          try { if (navigator.sendBeacon && navigator.sendBeacon(EP, new Blob([body], { type: 'text/plain' }))) return; } catch (e) {}
+          try { fetch(EP, { method: 'POST', body: body, keepalive: true, headers: { 'content-type': 'text/plain' } }).catch(function () {}); } catch (e) {}
+        }
+
+        // Sections: keyed by id, else slugified aria-label — every section has one.
+        var secs = {}, keyOf = function (el) {
+          return el.id || (el.getAttribute('aria-label') || el.tagName).toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
+        };
+        function finalize() {
+          var now = Date.now();
+          for (var k in secs) {
+            var s = secs[k], total = s.total + (s.enter ? now - s.enter : 0);
+            if (!s.seen) continue;
+            ev('section_view', { sec: k, v: total, first: s.first });
+            s.total = 0; if (s.enter) s.enter = now;
+          }
+        }
+
+        function start() {
+          ev('page_view', { ref: document.referrer.slice(0, 200), title: document.title.slice(0, 120), vw: innerWidth, vh: innerHeight });
+          if (location.pathname === '/thank-you') ev('booking_complete', { label: 'GHL survey redirect' });
+
+          if ('IntersectionObserver' in window) {
+            var io = new IntersectionObserver(function (entries) {
+              var now = Date.now();
+              entries.forEach(function (en) {
+                var k = keyOf(en.target), s = secs[k] || (secs[k] = { total: 0, enter: 0, seen: false, first: 0 });
+                if (en.isIntersecting) { if (!s.seen) { s.seen = true; s.first = now - t0; } s.enter = now; }
+                else if (s.enter) { s.total += now - s.enter; s.enter = 0; }
+              });
+            }, { threshold: 0.25 });
+            document.querySelectorAll('section, footer').forEach(function (el) { io.observe(el); });
+          }
+
+          // No throttle: the work is a few arithmetic ops, and rAF-based
+          // throttling stalls in background tabs and can drop the final position.
+          var marks = [25, 50, 75, 100];
+          function onScroll() {
+            var h = document.documentElement.scrollHeight - innerHeight;
+            var pct = h > 0 ? Math.min(100, Math.round((scrollY / h) * 100)) : 100;
+            if (pct > maxScroll) maxScroll = pct;
+            while (marks.length && pct >= marks[0]) ev('scroll', { v: marks.shift() });
+          }
+          addEventListener('scroll', onScroll, { passive: true }); onScroll();
+
+          document.addEventListener('click', function (e) {
+            var el = e.target && e.target.closest ? e.target.closest('a, button, [data-track]') : null;
+            if (!el) return;
+            var href = el.getAttribute('href') || '', kind = 'click';
+            if (/^tel:/i.test(href)) kind = 'call_click';
+            else if (el.classList.contains('schedule-btn-rai') || href === '/book') kind = 'book_click';
+            var label = el.getAttribute('data-track') || el.getAttribute('aria-label') || (el.textContent || '').replace(/\s+/g, ' ').trim();
+            var wrap = el.closest('section, footer, dialog');
+            ev(kind, {
+              label: label.slice(0, 60), sec: wrap ? keyOf(wrap) : '', href: href.slice(0, 120),
+              x: Math.round((e.clientX / innerWidth) * 100), y: Math.round((e.clientY / innerHeight) * 100)
+            });
+            if (kind !== 'click') flush();
+          }, true);
+
+          var left = false;
+          function leave() {
+            if (left) return; left = true;
+            var now = Date.now();
+            finalize();
+            ev('user_engagement', { v: now - tLast, scroll: maxScroll }); tLast = now;
+            flush();
+          }
+          addEventListener('pagehide', leave);
+          document.addEventListener('visibilitychange', function () {
+            if (document.visibilityState === 'hidden') leave(); else left = false;
+          });
+        }
+
+        // DOMContentLoaded, not load: sections exist by then, and waiting for
+        // every image would lose the page_view of anyone who bounces early.
+        if (document.readyState !== 'loading') setTimeout(start, 0);
+        else document.addEventListener('DOMContentLoaded', function () { setTimeout(start, 0); });
+      })();
+    </script>
     <!-- Preload LCP image (hero logo) before browser discovers it in HTML -->
     <link rel="preload" as="image" href="/assets/logo.png" fetchpriority="high" />
     <!-- Booking survey (GHL) is loaded on idle/intent — warm the connection early -->

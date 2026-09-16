@@ -12,11 +12,12 @@ const PHONE_NUMBER = "602-905-5281";
 >
   <main class="min-h-dvh bg-white font-sans text-black flex flex-col">
     <header class="flex items-center justify-between gap-4 px-5 sm:px-10 py-4 border-b-2 border-black">
-      <a href="/" aria-label="SDG Electric home">
+      <a href="/" aria-label="SDG Electric home" data-track="book-home">
         <img src="/assets/logo.png" alt="SDG Electric" width="120" height="40" class="h-8 w-auto" />
       </a>
       <a
         href={`tel:${PHONE_NUMBER}`}
+        data-track="book-call"
         class="font-black uppercase text-xs tracking-widest border-2 border-black px-5 py-3 hover:bg-black hover:text-white transition-all"
       >
         Call {PHONE_NUMBER}

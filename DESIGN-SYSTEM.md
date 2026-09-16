@@ -100,10 +100,34 @@ section — that's why this cap exists. Do not exceed `text-6xl` outside headlin
 - The RecreateAI booking widget/form belonged to another contractor and was
   removed (script, preconnects, and all CTA hrefs). Do not re-add any
   `recreateai.com` reference.
-- Analytics: intentionally none. The inherited GTM/GA/Ads tags fired into the
-  previous business's accounts and were fully removed. When SDG has their own
-  GTM/GA/Ads accounts, add the tags in `src/layouts/Base.astro` (marked spot
-  in `<head>`).
+- **Analytics: two things, and only two.**
+  - **Google Ads gtag** (`AW-18374148612`, SDG's Ads account) in `Base.astro` —
+    page views, remarketing, and the click-to-call conversion. No GA4, no GTM:
+    gtag is already loaded, so GA4 is a one-line `gtag('config', 'G-…')` if
+    ever wanted; GTM buys nothing when tags ship via git.
+  - **First-party tracker** — the inline script at the bottom of `Base.astro`
+    `<head>`. ~2KB gzipped, no cookies, no third-party domain, boots on
+    `DOMContentLoaded`. Event names follow GA4: `page_view` / `scroll` (25/50/75/100)
+    / `section_view` (dwell ms) / `click` / `book_click` / `call_click` /
+    `booking_complete` (thank-you view) / `user_engagement` (visible ms).
+    Batched to `/api/track` via `sendBeacon`. That endpoint is
+    `api/track.ts` (a Vercel function, same origin) writing to Turso
+    (`TURSO_DATABASE_URL` / `TURSO_AUTH_TOKEN`). Locally, `node
+    scripts/dev-api.ts` serves it on :3999 and `astro dev` proxies `/api` to it,
+    writing `.data/landing-events.db`. Read in the Sidehouse dashboard at
+    `/landing`. Sections are keyed by `id`, else slugified `aria-label` — keep
+    both stable or the dashboard's section history breaks.
+  - **Internal traffic:** visiting any page with `?internal=1` sets a permanent
+    `localStorage` flag for that browser; every event is then stamped
+    `internal=1` and hidden from the dashboard unless it's in Test mode.
+    `?internal=0` clears it. `localhost` is always internal. Do this once on
+    each of Joe's devices/browsers before testing on the live site.
+  - **Button tags:** every CTA carries `data-track="<section>-<action>"`
+    (`hero-book`, `sticky-call`, `emergency-book`, …). The tracker reports that
+    tag as the click label. A new CTA needs a tag here and a friendly name in
+    the dashboard's `src/app/landing/ga.tsx` `ELEMENT_NAMES`.
+  - The inherited GTM/GA tags fired into the previous business's accounts and
+    were removed. Do not re-add them.
 
 ## Phone / identity
 

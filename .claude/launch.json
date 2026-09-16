@@ -2,10 +2,22 @@
   "version": "0.0.1",
   "configurations": [
     {
+      "name": "sdg-dev",
+      "runtimeExecutable": "npm",
+      "runtimeArgs": ["run", "dev"],
+      "port": 3000
+    },
+    {
       "name": "sdg-preview",
       "runtimeExecutable": "npm",
       "runtimeArgs": ["run", "preview", "--", "--port", "3071"],
       "port": 3071
+    },
+    {
+      "name": "dev-api",
+      "runtimeExecutable": "node",
+      "runtimeArgs": ["scripts/dev-api.ts"],
+      "port": 3999
     }
   ]
 }
