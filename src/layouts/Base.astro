@@ -193,7 +193,7 @@ const canonicalURL = new URL(Astro.url.pathname.replace(/\.html$/, ''), Astro.si
         }
 
         // Sections: keyed by id, else slugified aria-label — every section has one.
-        var secs = {}, keyOf = function (el) {
+        var secs = {}, curSec = '', curRatio = 0, keyOf = function (el) {
           return el.id || (el.getAttribute('aria-label') || el.tagName).toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
         };
         function finalize() {
@@ -217,8 +217,11 @@ const canonicalURL = new URL(Astro.url.pathname.replace(/\.html$/, ''), Astro.si
                 var k = keyOf(en.target), s = secs[k] || (secs[k] = { total: 0, enter: 0, seen: false, first: 0 });
                 if (en.isIntersecting) { if (!s.seen) { s.seen = true; s.first = now - t0; } s.enter = now; }
                 else if (s.enter) { s.total += now - s.enter; s.enter = 0; }
+                // Most-visible section = what a sticky-bar tap is really "about".
+                if (en.isIntersecting && en.intersectionRatio >= curRatio) { curSec = k; curRatio = en.intersectionRatio; }
+                else if (!en.isIntersecting && k === curSec) { curRatio = 0; }
               });
-            }, { threshold: 0.25 });
+            }, { threshold: [0.25, 0.5, 0.75] });
             document.querySelectorAll('section, footer').forEach(function (el) { io.observe(el); });
           }
 
@@ -240,9 +243,10 @@ const canonicalURL = new URL(Astro.url.pathname.replace(/\.html$/, ''), Astro.si
             if (/^tel:/i.test(href)) kind = 'call_click';
             else if (el.classList.contains('schedule-btn-rai') || href === '/book') kind = 'book_click';
             var label = el.getAttribute('data-track') || el.getAttribute('aria-label') || (el.textContent || '').replace(/\s+/g, ' ').trim();
-            var wrap = el.closest('section, footer, dialog');
+            var wrap = el.closest('section, footer, dialog'), sticky = !!el.closest('#mobile-cta');
             ev(kind, {
-              label: label.slice(0, 60), sec: wrap ? keyOf(wrap) : '', href: href.slice(0, 120),
+              // Sticky bar has no section of its own: attribute to the section on screen, flag it.
+              label: label.slice(0, 60), sec: wrap ? keyOf(wrap) : (sticky ? curSec : ''), bar: sticky ? 1 : 0, href: href.slice(0, 120),
               x: Math.round((e.clientX / innerWidth) * 100), y: Math.round((e.clientY / innerHeight) * 100)
             });
             if (kind !== 'click') flush();
