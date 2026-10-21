@@ -17,6 +17,7 @@ interface Props {
   sectionLabel?: string;
   padTop?: boolean;
   padBottom?: boolean;
+  columns?: string;    // override the grid column classes, e.g. 'grid-cols-1 md:grid-cols-2'
 }
 
 const {
@@ -29,13 +30,14 @@ const {
   sectionLabel,
   padTop = true,
   padBottom = true,
+  columns,
 } = Astro.props;
 
 const darkBg = variant === 'dark';
-const gridCols =
-  variant === 'services' ? 'grid-cols-2 lg:grid-cols-4' :
+const gridCols = columns ??
+  (variant === 'services' ? 'grid-cols-2 lg:grid-cols-4' :
   variant === 'dark'     ? 'grid-cols-1 md:grid-cols-2' :
-                           'grid-cols-1 md:grid-cols-3';
+                           'grid-cols-1 md:grid-cols-3');
 ---
 
 <section
