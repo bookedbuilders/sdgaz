@@ -12,6 +12,7 @@ interface Props {
   bannerText?: string;
   bannerDuration?: string;
   callFirst?: boolean;   // urgent-intent pages: Call Now is the primary CTA
+  bookLabel?: string;    // booking CTA text, e.g. 'Schedule Free Estimate'
 }
 
 const {
@@ -23,6 +24,7 @@ const {
   bannerText = '24/7 Emergency Electricians — Phoenix',
   bannerDuration = '15s',
   callFirst = false,
+  bookLabel = 'Schedule Now',
 } = Astro.props;
 
 // Primary = accent fill + hard shadow; secondary = outline. callFirst swaps
@@ -84,7 +86,7 @@ const PHONE_NUMBER = "602-905-5281";
           data-track="hero-book"
           class={`${bookCta} ${callFirst ? 'order-2' : 'order-1'}`}
         >
-          Schedule Now
+          {bookLabel}
           <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill={bookIconFill} stroke="none" aria-hidden="true"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
         </a>
 

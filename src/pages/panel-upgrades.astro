@@ -1,11 +1,13 @@
 ---
 // PPC landing page for panel upgrade keywords. Same template as emergency-electrician.
-// Copy is adapted from sdgaz.com/services/panel-upgrades; the phone is the PPC tracking number (see DESIGN-SYSTEM.md).
+// Section order follows sdgaz.com/services/panel-upgrades; copy is that page, condensed.
+// Every booking CTA says "Schedule Free Estimate". Phone is the PPC tracking number (see DESIGN-SYSTEM.md).
 import Base from '../layouts/Base.astro';
 import Hero from '../components/Hero.astro';
 import TrustBar from '../components/TrustBar.astro';
 import CardGrid from '../components/CardGrid.astro';
 import PanelProof from '../components/PanelProof.astro';
+import NeedPower from '../components/NeedPower.astro';
 import Reviews from '../components/Reviews.astro';
 import FAQ from '../components/FAQ.astro';
 import Authority from '../components/Authority.astro';
@@ -13,34 +15,43 @@ import Footer from '../components/Footer.astro';
 import MobileStickyCTA from '../components/MobileStickyCTA.astro';
 import BookingModal from '../components/BookingModal.astro';
 
+const BOOK = "Schedule Free Estimate";
+
 const signs = [
-  { icon: "🌡️", title: "BREAKERS TRIP IN SUMMER",  desc: "A panel that seemed fine in March starts tripping by July. Long AC run times on a hot garage wall push an undersized panel past its limit." },
-  { icon: "🔌", title: "WARM OR BUZZING PANEL",    desc: "A panel should be silent and cool. Heat, buzzing, or scorch marks mean a failing breaker or a loose connection under load. Don't wait on this one." },
-  { icon: "🧩", title: "NO OPEN SLOTS",            desc: "Circuits squeezed in, breakers doubled up. When there's no room left, every new load is a compromise." },
-  { icon: "🚗", title: "ADDING AN EV CHARGER OR AC", desc: "A Level 2 charger, a new AC unit, a pool pump, or a heat pump each adds steady load for hours. Check capacity before you buy the equipment." },
-  { icon: "🏚️", title: "FUSE BOX OR OUTDATED PANEL", desc: "Older equipment wasn't built for today's number of circuits and parts can be hard to find. Age alone isn't a reason, but it's a reason to look closely." },
-  { icon: "🔥", title: "BURNING SMELL",            desc: "A fishy or burning-plastic smell near the panel is overheating. Shut the main off if it's safe to reach and call now." },
+  { icon: "🌡️", title: "BREAKERS TRIP IN SUMMER",   desc: "Fine in March, tripping by July. Long AC run times on a hot garage wall push an undersized panel past its limit." },
+  { icon: "🔌", title: "WARM OR BUZZING PANEL",     desc: "A panel should be silent and cool. Heat, buzzing, or scorch marks mean a failing breaker or a loose connection under load." },
+  { icon: "🧩", title: "NO OPEN SLOTS",             desc: "Circuits squeezed in, breakers doubled up. When there's no room left, every new load is a compromise." },
+  { icon: "🚗", title: "ADDING AN EV CHARGER OR AC", desc: "A Level 2 charger, a new AC, a pool pump, or a heat pump each adds steady load for hours. Check capacity before you buy the equipment." },
+  { icon: "🏚️", title: "FUSE BOX OR OUTDATED PANEL", desc: "Older equipment wasn't built for today's number of circuits, and parts can be hard to find. Age alone isn't the reason. It's a reason to look." },
+  { icon: "🔥", title: "BURNING SMELL",             desc: "A fishy or burning-plastic smell near the panel is overheating. Shut the main off if it's safe to reach and call now." },
+];
+
+const notNeeded = [
+  { icon: "1", title: "ONE CIRCUIT TRIPS",        desc: "A breaker that trips only when the microwave and toaster run together is an overloaded circuit. Moving a load or adding a circuit fixes it." },
+  { icon: "2", title: "AN APPLIANCE IS THE CAUSE", desc: "A failing AC motor, pool pump, or space heater can trip a healthy breaker. Fix the appliance, keep the panel." },
+  { icon: "3", title: "YOU JUST NEED A CIRCUIT",   desc: "With open slots and room in your service, a dedicated circuit for a window unit, shop tool, or hot tub may be all you need." },
+  { icon: "4", title: "YOU WANT SURGE PROTECTION", desc: "Whole-house surge protection is added to an existing panel in good condition. No replacement required." },
 ];
 
 const steps = [
-  { icon: "1", title: "LOAD CALCULATION",      desc: "We add up what your home draws, including long summer AC cycles, and compare it to what your service can safely carry. If you have room, we'll tell you an upgrade isn't justified." },
-  { icon: "2", title: "UPFRONT ESTIMATE",      desc: "Panel size, service size, and what's included, priced before we touch a wire. You approve everything first." },
-  { icon: "3", title: "PERMIT AND INSTALL",    desc: "We pull the permit. The power-off part of the job usually takes part of a day. Plan where family and pets will be, and keep the fridge closed." },
-  { icon: "4", title: "INSPECT AND RESTORE",   desc: "City inspection passed, circuits clearly labeled, power restored. You get a panel sized for how your home really runs, with room for what you've planned." },
+  { icon: "1", title: "LOAD CALCULATION",   desc: "We add up what your home draws, including long summer AC cycles, and compare it to what your service can safely carry. If you have room, we'll tell you an upgrade isn't justified." },
+  { icon: "2", title: "UPFRONT ESTIMATE",   desc: "Panel size, service size, and what's included, priced before we touch a wire. You approve everything first." },
+  { icon: "3", title: "PERMIT AND INSTALL", desc: "We pull the permit. The power-off part of the job usually takes part of a day. Plan where family and pets will be, and keep the fridge closed." },
+  { icon: "4", title: "INSPECT AND RESTORE", desc: "City inspection passed, circuits clearly labeled, power restored. A panel sized for how your home really runs, with room for what you've planned." },
 ];
 
 const panelFaqs = [
-  { q: "Do I need a full panel replacement?", a: "Not always. One breaker that trips when the microwave and toaster run together is an overloaded circuit, not a bad panel. A failing AC motor or pool pump can trip a healthy breaker. If your panel is properly sized, has open slots, and shows no heat, we'll point you to a repair or a new circuit instead. The load calculation decides it, not the hardware." },
+  { q: "Do I need a full panel replacement?", a: "Not always. If your panel is properly sized, has open slots, and shows no heat, we'll point you to a repair or a new circuit instead. The load calculation decides it, not the hardware." },
   { q: "Can my 100-amp panel handle an EV charger?", a: "Sometimes. If there's open breaker space and the math works out, yes. If your AC, pool pump, and other big loads already use most of that capacity, adding more can push the panel past what it can safely handle. Many chargers can also be set to draw less and still charge overnight." },
   { q: "How long will the power be off?", a: "Usually part of a day, depending on the panel, the wiring, and whether the service size is changing. In summer, ask about an early start, and tell us about any medical equipment that needs power." },
-  { q: "Is the permit included?", a: "Yes. We pull the permit and the job isn't done until the city inspection passes and your circuits are labeled." },
-  { q: "What areas do you cover?", a: "Central Phoenix north to Anthem and Happy Valley, Scottsdale, Paradise Valley, and the West Valley: Peoria, Glendale, and Surprise." },
+  { q: "Is the permit included?", a: "Yes. We pull the permit, and the job isn't done until the city inspection passes and your circuits are labeled." },
+  { q: "What does the estimate cost?", a: "Nothing. We look at your panel, run the load calculation, and give you a price before any work begins." },
 ];
 ---
 
 <Base
   title="Electrical Panel Upgrade & Replacement in Phoenix | Free Estimate | SDG Electric"
-  description="Breakers tripping every summer? Adding an EV charger or AC? SDG Electric sizes your panel with a load calculation first, pulls the permit, and passes inspection. Licensed Phoenix electricians. Call 602-905-5281."
+  description="Breakers tripping every summer? Adding an EV charger or AC? SDG Electric sizes your panel with a load calculation first, pulls the permit, and passes inspection. Schedule a free estimate. 602-905-5281."
 >
   <div class="min-h-screen bg-white font-sans text-black overflow-x-hidden w-full relative">
     <Hero
@@ -48,8 +59,9 @@ const panelFaqs = [
       headline={'Panel upgrade. <span class="text-accent">Sized right.</span>'}
       headlineSizeClass="text-[44px] sm:text-[76px] md:text-[100px] lg:text-[116px]"
       subheadline="Load calculation first. Licensed, permitted, inspected. Phoenix, Scottsdale, and the West Valley."
-      badges={["Licensed & Bonded", "Permit & Inspection Included", "Upfront Pricing"]}
+      badges={["Licensed & Bonded", "Permit & Inspection Included", "Free Estimates"]}
       bannerText="Electrical Panel Upgrades — Phoenix — Free On-Site Estimate"
+      bookLabel={BOOK}
     />
     <TrustBar />
     <CardGrid
@@ -58,11 +70,22 @@ const panelFaqs = [
       padTop={false}
       eyebrow="Upgrade, Not Just a Repair"
       headline={`SIGNS YOUR PANEL <br />IS OUT OF ROOM.`}
-      subheadline="Most older panels didn't fail. The house around them changed: refrigerated AC, a pool, electric appliances, an EV. These are the signs the panel can't keep up."
+      subheadline="Most older panels didn't fail. The house around them changed: refrigerated AC, a pool, electric appliances, an EV."
       sectionId="panel-signs"
       sectionLabel="Signs your panel needs an upgrade"
     />
     <PanelProof />
+    <CardGrid
+      cards={notNeeded}
+      variant="light"
+      columns="grid-cols-1 md:grid-cols-2"
+      eyebrow="Straight Answer"
+      headline={`WHEN YOU DON'T <br />NEED A NEW PANEL.`}
+      subheadline="A new panel is a big job and not always the right one. We'll tell you to hold off when:"
+      sectionId="panel-not-needed"
+      sectionLabel="When you do not need a full panel replacement"
+      padBottom={false}
+    />
     <CardGrid
       cards={steps}
       variant="light"
@@ -73,11 +96,20 @@ const panelFaqs = [
       sectionId="panel-process"
       sectionLabel="What happens during a panel upgrade"
     />
+    <NeedPower
+      eyebrow="Start With the Numbers"
+      headline={'SCHEDULE YOUR <br /><span class="text-accent">PANEL ASSESSMENT.</span>'}
+      body="A look at your panel and a load calculation, so you know what your home needs before any work begins. Free, no commitment."
+      bookLabel={BOOK}
+      bookTrack="panel-assess-book"
+      callTrack="panel-assess-call"
+      sectionLabel="Schedule your panel assessment"
+    />
     <Reviews padBottom={true} />
     <FAQ faqs={panelFaqs} eyebrow="Panel Answers" />
     <Authority />
     <Footer />
-    <MobileStickyCTA />
+    <MobileStickyCTA bookLabel={BOOK} />
     <BookingModal />
   </div>
 </Base>
