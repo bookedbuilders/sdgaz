@@ -2,6 +2,7 @@
 import AlertBanner from './AlertBanner.astro';
 import Nav from './Nav.astro';
 import FlickeringGrid from './FlickeringGrid.astro';
+import { HERO_FORM_ID, HERO_FORM_URL } from '../config';
 
 interface Props {
   eyebrow?: string;
@@ -13,6 +14,7 @@ interface Props {
   bannerDuration?: string;
   callFirst?: boolean;   // urgent-intent pages: Call Now is the primary CTA
   bookLabel?: string;    // booking CTA text, e.g. 'Schedule Free Estimate'
+  showForm?: boolean;    // PPC page: GHL lead form card replaces the Schedule button
 }
 
 const {
@@ -25,7 +27,11 @@ const {
   bannerDuration = '15s',
   callFirst = false,
   bookLabel = 'Schedule Now',
+  showForm = false,
 } = Astro.props;
+
+// Form variant: two columns on desktop, so the headline steps down a size.
+const headlineClass = showForm ? 'text-[54px] sm:text-[88px] lg:text-[96px] xl:text-[112px]' : headlineSizeClass;
 
 // Primary = accent fill + hard shadow; secondary = outline. callFirst swaps
 // which action gets the primary treatment and puts it on top.
@@ -56,13 +62,16 @@ const PHONE_NUMBER = "602-905-5281";
   />
 
   <div class="relative z-10 flex-1 flex flex-col items-center justify-center px-4 pt-6 pb-12 sm:pt-16 sm:pb-20">
-    <div class="flex flex-col items-center text-center max-w-4xl mx-auto w-full">
+    <div class={showForm
+      ? "grid grid-cols-1 lg:grid-cols-[1.1fr_1fr] gap-10 lg:gap-16 items-center max-w-7xl mx-auto w-full"
+      : "flex flex-col items-center text-center max-w-4xl mx-auto w-full"}>
+    <div class={showForm ? "flex flex-col items-center lg:items-start text-center lg:text-left w-full" : "contents"}>
 
       {eyebrow && (
         <p class="text-accent font-black text-xs sm:text-sm uppercase tracking-[0.4em] italic mb-6">{eyebrow}</p>
       )}
 
-      <h1 class={`italic uppercase ${headlineSizeClass} font-black tracking-normal leading-[0.85] text-black`} set:html={headline} />
+      <h1 class={`italic uppercase ${headlineClass} font-black tracking-normal leading-[0.85] text-black`} set:html={headline} />
 
       <p class="text-xl font-medium text-black/70 max-w-sm sm:max-w-xl leading-relaxed mt-5 sm:mt-7">
         {subheadline}
@@ -79,7 +88,8 @@ const PHONE_NUMBER = "602-905-5281";
       )}
 
       <!-- CTAs -->
-      <div class="flex flex-col items-center mt-8 sm:mt-14 w-full">
+      <div class={`flex flex-col items-center ${showForm ? 'lg:items-start mt-8 sm:mt-10' : 'mt-8 sm:mt-14'} w-full`}>
+        {!showForm && (
         <a
           href="/book"
           aria-label="Get my free estimate — schedule service"
@@ -89,19 +99,20 @@ const PHONE_NUMBER = "602-905-5281";
           {bookLabel}
           <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill={bookIconFill} stroke="none" aria-hidden="true"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
         </a>
+        )}
 
         <a
           href={`tel:${PHONE_NUMBER}`}
           aria-label="Call Now — hero"
           data-track="hero-call"
-          class={`${callCta} ${callFirst ? 'order-1' : 'order-2'}`}
+          class={showForm ? `${primaryCta} !mt-0 order-1` : `${callCta} ${callFirst ? 'order-1' : 'order-2'}`}
         >
           <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="currentColor" stroke="none" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.26 13a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.18 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L7.91 9.91a16 16 0 0 0 6.18 6.18l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
           Call Now
         </a>
 
         <!-- Google Review Badge -->
-        <div class="order-3 inline-flex items-center gap-3 mt-8 sm:mt-16 border border-black/10 px-4 sm:px-5 py-3 bg-white">
+        <div class={`order-3 inline-flex items-center gap-3 ${showForm ? 'hidden lg:inline-flex mt-8' : 'mt-8 sm:mt-16'} border border-black/10 px-4 sm:px-5 py-3 bg-white`}>
           <div class="flex gap-1 shrink-0" aria-hidden="true">
             <img src="/assets/crew-1.webp" alt="" width="36" height="36" loading="lazy" decoding="async" class="w-9 h-9 border border-black/20 object-cover" />
             <img src="/assets/crew-2.webp" alt="" width="36" height="36" loading="lazy" decoding="async" class="w-9 h-9 border border-black/20 object-cover" />
@@ -129,12 +140,45 @@ const PHONE_NUMBER = "602-905-5281";
         <a
           href="#reviews"
           data-track="hero-reviews-link"
-          class="order-4 mt-3 text-black/40 font-black uppercase italic text-[10px] tracking-widest hover:text-accent transition-all underline decoration-2 underline-offset-4"
+          class={`${showForm ? 'hidden lg:inline ' : ''}order-4 mt-3 text-black/40 font-black uppercase italic text-[10px] tracking-widest hover:text-accent transition-all underline decoration-2 underline-offset-4`}
         >
           View 5-Star Reviews
         </a>
 
       </div>
+    </div>
+
+    {showForm && (
+      <div id="hero-form" class="w-full max-w-md mx-auto lg:max-w-none bg-white border-2 border-black shadow-[12px_12px_0px_0px_#D58C46] p-5 sm:p-8 text-left">
+        <p class="font-black italic uppercase text-2xl sm:text-3xl leading-none tracking-tight">Book your electrician</p>
+        <p class="text-sm font-medium text-black/60 mt-2 mb-5">Takes 30 seconds. We'll call you right back.</p>
+        <iframe
+          id={`inline-${HERO_FORM_ID}`}
+          data-src={HERO_FORM_URL}
+          title="Book your electrician"
+          class="w-full border-none overflow-hidden"
+          style="height:640px"
+          data-layout="{'id':'INLINE'}"
+          data-trigger-type="alwaysShow"
+          data-activation-type="alwaysActivated"
+          data-deactivation-type="neverDeactivate"
+          data-form-name="PPC Hero Form"
+          data-height="640"
+          data-layout-iframe-id={`inline-${HERO_FORM_ID}`}
+          data-form-id={HERO_FORM_ID}
+        ></iframe>
+        <script is:inline>
+          (function () {
+            var f = document.querySelector('#hero-form iframe');
+            var base = f.dataset.src;
+            f.src = window.__sdgSurveyUrl ? window.__sdgSurveyUrl(base) : base;
+            var s = document.createElement('script');
+            s.src = 'https://link.msgsndr.com/js/form_embed.js'; s.async = true;
+            document.body.appendChild(s);
+          })();
+        </script>
+      </div>
+    )}
     </div>
   </div>
 </section>
