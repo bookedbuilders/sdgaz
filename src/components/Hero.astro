@@ -149,9 +149,9 @@ const PHONE_NUMBER = "602-905-5281";
     </div>
 
     {showForm && (
-      <div id="hero-form" class="w-full max-w-md mx-auto lg:max-w-none bg-white border-2 border-black shadow-[12px_12px_0px_0px_#D58C46] p-5 sm:p-8 text-left">
+      <div id="hero-form" class="scroll-mt-24 w-full max-w-md mx-auto lg:max-w-none bg-white border-2 border-black shadow-[12px_12px_0px_0px_#D58C46] p-5 sm:p-8 text-left">
         <p class="font-black italic uppercase text-2xl sm:text-3xl leading-none tracking-tight">Book your electrician</p>
-        <p class="text-sm font-medium text-black/60 mt-2 mb-5">Takes 30 seconds. We'll call you right back.</p>
+        <div class="mb-5"></div>
         <iframe
           id={`inline-${HERO_FORM_ID}`}
           data-src={HERO_FORM_URL}
@@ -167,8 +167,17 @@ const PHONE_NUMBER = "602-905-5281";
           data-layout-iframe-id={`inline-${HERO_FORM_ID}`}
           data-form-id={HERO_FORM_ID}
         ></iframe>
+        <p class="text-center text-sm font-bold text-black mt-1">We'll call you in 60 seconds to confirm.</p>
         <script is:inline>
           (function () {
+            // Every Schedule button on this page scrolls to the form instead of the survey.
+            document.addEventListener('click', function (e) {
+              var a = e.target.closest && e.target.closest('.schedule-btn-rai, a[href="/book"]');
+              if (!a) return;
+              e.preventDefault(); e.stopImmediatePropagation();
+              var card = document.getElementById('hero-form');
+              card.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }, true);
             var f = document.querySelector('#hero-form iframe');
             var base = f.dataset.src;
             f.src = window.__sdgSurveyUrl ? window.__sdgSurveyUrl(base) : base;
